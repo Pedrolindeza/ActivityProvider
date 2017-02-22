@@ -16,3 +16,4 @@ To run tests execute: mvn clean install
 
 81172 Carolina Xavier cimx1@hotmail.com cimx
 
+81728 Madalena Assembleia madalena.assembleia@tecnico.ulisboa.pt madalenassembleia
