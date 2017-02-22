@@ -14,6 +14,9 @@ To run tests execute: mvn clean install
 
 81328 Inês Leite ines.marreiros.leite@hotmail.com inesleite
 
-81172 Carolina Xavier cimx1@hotmail.com cimx
+81858 João Oliveira joao.caseiro@tecnico.ulisboa.pt joaoliveir
 
 81728 Madalena Assembleia madalena.assembleia@tecnico.ulisboa.pt madalenassembleia
+
+81172 Carolina Xavier cimx1@hotmail.com cimx
+
