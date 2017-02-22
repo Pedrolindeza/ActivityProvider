@@ -4,9 +4,9 @@ To run tests execute: mvn clean install
 
 81596 Ricardo Xavier ricardojosexavier@hotmail.com pevidex 
  
-81329 João Calisto joao.s.calisto@tecnico.ulisboa.pt jcalisto
-
 80831 Pedro Lindeza pedro.lindeza@tecnico.ulisboa.pt pedrolindeza
+
+81329 João Calisto joao.s.calisto@tecnico.ulisboa.pt jcalisto
 
 80805 João Trindade joao.pedro.trindade@tecnico.ulisboa.pt jptrindade
 
