@@ -11,7 +11,7 @@ bank + broker:
 hotel:
 
 81172 Carolina Xavier cimx1@hotmail.com cimx
-81596 Ricardo Xavier ricardojosexavier@hotmail.com pevidex 
+81596 Ricardo Xavier ricardojosexavier@hotmail.com pevidex
 81186 Stéphane Duarte stephaneduarte@tecnico.ulisboa.pt stephaneduarte
 
 activity:
