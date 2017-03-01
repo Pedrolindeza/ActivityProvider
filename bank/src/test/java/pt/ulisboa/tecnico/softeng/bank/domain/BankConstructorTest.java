@@ -5,6 +5,9 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import pt.ulisboa.tecnico.softeng.bank.exception.BankException;
+
+
 public class BankConstructorTest {
 
 	@Before
@@ -21,6 +24,11 @@ public class BankConstructorTest {
 		Assert.assertEquals(1, Bank.banks.size());
 		Assert.assertEquals(0, bank.getNumberOfAccounts());
 		Assert.assertEquals(0, bank.getNumberOfClients());
+	}
+	@Test(expected = BankException.class)
+	public void nullString(){
+		Bank bank = new Bank(null,null);
+		
 	}
 
 	@After

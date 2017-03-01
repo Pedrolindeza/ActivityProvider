@@ -28,8 +28,16 @@ public class Bank {
 	}
 
 	private void checkCode(String code) {
+		if(code==null){
+			throw new BankException();
+		}
 		if (code.length() != Bank.CODE_SIZE) {
 			throw new BankException();
+		}
+		for(Bank b : banks){
+			if(b.getCode().equals(this.code)){
+				throw new BankException();
+			}
 		}
 	}
 
