@@ -2,7 +2,7 @@
 
 To run tests execute: mvn clean install
 
-Bank && Broker:
+	 Bank && Broker:
 
 80831 Pedro Lindeza pedro.lindeza@tecnico.ulisboa.pt pedrolindeza
 
@@ -10,7 +10,7 @@ Bank && Broker:
 
 81728 Madalena Assembleia madalena.assembleia@tecnico.ulisboa.pt madalenassembleia
 
-Hotel:
+	Hotel:
 
 81172 Carolina Xavier cimx1@hotmail.com cimx
 
@@ -18,7 +18,7 @@ Hotel:
 
 81186 Stéphane Duarte stephaneduarte@tecnico.ulisboa.pt stephaneduarte
 
-Activity:
+	Activity:
 
 81329 João Calisto joao.s.calisto@tecnico.ulisboa.pt jcalisto
 
