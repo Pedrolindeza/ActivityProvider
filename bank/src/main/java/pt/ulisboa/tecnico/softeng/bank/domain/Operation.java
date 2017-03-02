@@ -2,6 +2,8 @@ package pt.ulisboa.tecnico.softeng.bank.domain;
 
 import java.time.LocalDateTime;
 
+import pt.ulisboa.tecnico.softeng.bank.exception.BankException;
+
 class Operation {
 	static enum Type {
 		DEPOSIT, WITHDRAW
@@ -16,6 +18,9 @@ class Operation {
 	private final LocalDateTime time;
 
 	Operation(Type type, Account account, int value) {
+		if(type==null || account == null || value <=0){
+			throw new BankException();
+		}
 		this.reference = account.getBank().getCode() + Integer.toString(++Operation.counter);
 		this.type = type;
 		this.account = account;

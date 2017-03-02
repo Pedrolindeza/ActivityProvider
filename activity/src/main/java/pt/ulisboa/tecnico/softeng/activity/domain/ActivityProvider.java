@@ -23,6 +23,7 @@ public class ActivityProvider {
 		this.name = name;
 
 		ActivityProvider.providers.add(this);
+
 	}
 
 	private void checkCode(String code) {
