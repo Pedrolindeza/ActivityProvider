@@ -42,14 +42,17 @@ public class Account {
 	}
 
 	public String deposit(int amount) {
+		if(amount<=0){
+			throw new BankException();
+		}
+		
 		this.balance = this.balance + amount;
-
 		Operation operation = new Operation(Operation.Type.DEPOSIT, this, amount);
 		return operation.getReference();
 	}
 
 	public String withdraw(int amount) {
-		if (amount > this.balance) {
+		if ((amount > this.balance)||(amount<=0)) {
 			throw new BankException();
 		}
 

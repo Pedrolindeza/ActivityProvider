@@ -5,6 +5,9 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import pt.ulisboa.tecnico.softeng.hotel.domain.Hotel;
+import pt.ulisboa.tecnico.softeng.hotel.exception.HotelException;
+
 public class HotelConstructorTest {
 
 	@Before
@@ -21,10 +24,26 @@ public class HotelConstructorTest {
 		Assert.assertEquals(0, hotel.getNumberOfRooms());
 		Assert.assertEquals(1, Hotel.hotels.size());
 	}
-
+	
+	@Test(expected = HotelException.class)
+	public void nullString(){
+		Hotel hotel = new Hotel(null, null);
+	}
+	
+	@Test(expected = HotelException.class)
+	public void unique(){
+		Hotel hotel = new Hotel("XPTO123", "Londres");
+		Hotel hotel2 = new Hotel("XPTO123", "Lds");
+	}
+	
+	@Test(expected = HotelException.class)
+	public void sevenChars(){
+		Hotel hotel = new Hotel("XP11", "Londres");
+	}
+	
 	@After
 	public void tearDown() {
 		Hotel.hotels.clear();
 	}
-
+	
 }

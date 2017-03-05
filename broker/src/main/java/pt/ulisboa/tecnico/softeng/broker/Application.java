@@ -24,6 +24,7 @@ public class Application {
 
 		System.out.println("Your payment reference is " + adventure.getBankPayment() + " and you have "
 				+ account.getBalance() + " euros left in your account");
+		System.out.println("Your hotel reservation refference is "+ adventure.getRoomBooking()+" and your activity reservation refference is "+adventure.getActivityBooking());
 	}
 
 }

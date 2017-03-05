@@ -5,6 +5,8 @@ import java.util.Set;
 
 import org.joda.time.LocalDate;
 
+import pt.ulisboa.tecnico.softeng.activity.domain.exception.ActivityException;
+
 public class ActivityOffer {
 	private final LocalDate begin;
 	private final LocalDate end;
@@ -12,11 +14,15 @@ public class ActivityOffer {
 	private final Set<Booking> bookings = new HashSet<>();
 
 	public ActivityOffer(Activity activity, LocalDate begin, LocalDate end) {
-		this.begin = begin;
-		this.end = end;
-		this.capacity = activity.getCapacity();
-
-		activity.addOffer(this);
+		if(begin.isAfter(end))
+			throw new ActivityException("End date before begin date");
+		else {
+			this.begin = begin;
+			this.end = end;
+			this.capacity = activity.getCapacity();
+	
+			activity.addOffer(this);
+		}
 	}
 
 	LocalDate getBegin() {

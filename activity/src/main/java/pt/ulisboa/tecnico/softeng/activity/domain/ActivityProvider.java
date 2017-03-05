@@ -18,6 +18,7 @@ public class ActivityProvider {
 
 	public ActivityProvider(String code, String name) {
 		checkCode(code);
+		checkName(name);
 
 		this.code = code;
 		this.name = name;
@@ -25,11 +26,24 @@ public class ActivityProvider {
 		ActivityProvider.providers.add(this);
 	}
 
-	private void checkCode(String code) {
-		if (code.length() != ActivityProvider.CODE_SIZE) {
+	public void checkCode(String code){
+		if (code.length() != ActivityProvider.CODE_SIZE){
 			throw new ActivityException();
 		}
+		for (ActivityProvider provider: providers){
+			if(provider.getCode().equals(code)){
+				throw new ActivityException();
+			}
+		}	
 	}
+
+	public void checkName(String name){
+		for (ActivityProvider provider: providers){
+			if(provider.getName().equals(name)){
+				throw new ActivityException();
+			}
+		}
+	}	
 
 	String getName() {
 		return this.name;

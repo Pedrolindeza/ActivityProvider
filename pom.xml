@@ -74,6 +74,8 @@
 	</dependencies>
 
 	<modules>
+
+		
 		<module>bank</module>
 		<module>hotel</module>
 		<module>activity</module>
