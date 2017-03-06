@@ -49,6 +49,9 @@ public class Booking {
 		if (arrival.isBefore(this.arrival) && departure.isAfter(this.departure)) {
 			return true;
 		}
+		if (arrival.isEqual(this.arrival) || departure.isEqual(this.departure)) {
+			return true;
+		}
 		return false;
 	}
 }
