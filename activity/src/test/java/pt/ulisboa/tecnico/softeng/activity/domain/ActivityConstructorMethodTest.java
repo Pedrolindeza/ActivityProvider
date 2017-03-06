@@ -5,6 +5,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import pt.ulisboa.tecnico.softeng.activity.domain.exception.ActivityException;
+
 public class ActivityConstructorMethodTest {
 	private ActivityProvider provider;
 
@@ -26,6 +28,26 @@ public class ActivityConstructorMethodTest {
 		Assert.assertEquals(0, activity.getNumberOfOffers());
 		Assert.assertEquals(1, this.provider.getNumberOfActivities());
 	}
+
+	@Test(expected = ActivityException.class)
+ 	public void minAgeTest(){
+		Activity activity = new Activity(this.provider, "Bush Walking", 10, 80, 25);
+ 	}
+
+ 	@Test(expected = ActivityException.class)
+ 	public void maxAgeTest(){
+		Activity activity = new Activity(this.provider, "Bush Walking", 18, 100, 25);
+ 	}
+
+ 	@Test(expected = ActivityException.class)
+ 	public void AgeTest(){
+		Activity activity = new Activity(this.provider, "Bush Walking", 40, 20, 25);
+ 	}
+
+ 	@Test(expected = ActivityException.class)
+ 	public void capacityTest(){
+		Activity activity = new Activity(this.provider, "Bush Walking", 18, 80, 0);
+ 	}
 
 	@After
 	public void tearDown() {
