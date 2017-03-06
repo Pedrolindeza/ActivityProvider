@@ -25,11 +25,6 @@ public class BankConstructorTest {
 		Assert.assertEquals(0, bank.getNumberOfAccounts());
 		Assert.assertEquals(0, bank.getNumberOfClients());
 	}
-	@Test(expected = BankException.class)
-	public void nullString(){
-		Bank bank = new Bank(null,null);
-		
-	}
 
 	@After
 	public void tearDown() {

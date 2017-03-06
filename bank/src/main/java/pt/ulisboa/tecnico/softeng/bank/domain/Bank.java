@@ -74,6 +74,25 @@ public class Bank {
 	}
 
 	public Account getAccount(String IBAN) {
+		
+		/* Bank with no accounts */
+		
+		if( this.accounts.size() == 0 ){
+			throw new BankException();
+		}
+		
+		/*IBAN length > CODE_SIZE*/
+		
+		if ( IBAN.length() <= Bank.CODE_SIZE ){
+			throw new BankException();
+		}
+		
+		/* IBAN not from this bank */
+		
+		if ( !IBAN.startsWith( this.getCode().toString() ) ){
+			throw new BankException();
+		}
+		
 		for (Account account : this.accounts) {
 			if (account.getIBAN().equals(IBAN)) {
 				return account;
