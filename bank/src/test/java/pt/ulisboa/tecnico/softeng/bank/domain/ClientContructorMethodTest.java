@@ -1,13 +1,20 @@
 package pt.ulisboa.tecnico.softeng.bank.domain;
 
+import pt.ulisboa.tecnico.softeng.bank.exception.BankException;
+
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.Rule;
+import org.junit.rules.ExpectedException;
 
 public class ClientContructorMethodTest {
 	Bank bank;
 
+	@Rule
+	public ExpectedException exception = ExpectedException.none();
+	
 	@Before
 	public void setUp() {
 		this.bank = new Bank("Money", "BK01");
@@ -22,6 +29,20 @@ public class ClientContructorMethodTest {
 		Assert.assertTrue(this.bank.hasClient(client));
 	}
 
+	
+	@Test
+ 	public void bankNull(){
+ 		exception.expect(BankException.class);
+ 		new Client(null,"Madalena");
+ 	}
+	
+	@Test
+ 	public void nameNull(){
+ 		exception.expect(BankException.class);
+ 		new Client(this.bank,null);
+ 	}
+	
+	
 	@After
 	public void tearDown() {
 		Bank.banks.clear();

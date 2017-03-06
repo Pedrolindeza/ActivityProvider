@@ -34,12 +34,14 @@ public class HotelHasVacancyMethodTest {
 	}
 
 	/*Testa indisponibilidade:
-		19 20 21 22 23 24
+	        19 20 21 22 23 24 25
 	Ocupado:   X  X  X  X
-	T01:          X  X
-	T02:    X  X  X
-	T03:             X  X  X
-	T04:    X  X  X  X  X  X */
+	T01:          X  X            - Testa intervalo entre os limites
+	T02:    X  X  X               - Testa intervalo com chegada antes e partida dentro dos limites
+	T03:             X  X  X      - Testa intervalo com chegada dentro dos limites e partida depois
+	T04:    X  X  X  X  X  X      - Testa intervalo com chegada antes e partida depois dos limites
+	T05:       X  X  X  X         - Testa intervalo igual aos limites [BUG FIXED]
+	T06:       X  X  X  X  X  X   - Teste um limite tendo outro qualquer data*/
 
 	@Test
 	public void hasNoVacancy01() {
@@ -75,6 +77,26 @@ public class HotelHasVacancyMethodTest {
 	public void hasNoVacancy04() {
 		LocalDate arrival = new LocalDate(2016, 12, 19);
 		LocalDate departure = new LocalDate(2016, 12, 24);
+
+		Room room = this.hotel.hasVacancy(Type.SINGLE, arrival, departure);
+
+		Assert.assertNull(room);
+	}
+
+	@Test
+	public void hasNoVacancy05() {
+		LocalDate arrival = new LocalDate(2016, 12, 20);
+		LocalDate departure = new LocalDate(2016, 12, 23);
+
+		Room room = this.hotel.hasVacancy(Type.SINGLE, arrival, departure);
+
+		Assert.assertNull(room);
+	}
+
+	@Test
+	public void hasNoVacancy06() {
+		LocalDate arrival = new LocalDate(2016, 12, 20);
+		LocalDate departure = new LocalDate(2016, 12, 25);
 
 		Room room = this.hotel.hasVacancy(Type.SINGLE, arrival, departure);
 

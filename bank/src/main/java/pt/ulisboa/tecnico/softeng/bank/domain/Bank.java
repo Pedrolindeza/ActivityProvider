@@ -20,7 +20,9 @@ public class Bank {
 
 	public Bank(String name, String code) {
 		checkCode(code);
-
+		if (name == null){
+			throw new BankException();
+		}
 		this.name = name;
 		this.code = code;
 
@@ -34,6 +36,7 @@ public class Bank {
 		if (code.length() != Bank.CODE_SIZE) {
 			throw new BankException();
 		}
+		
 		for(Bank b : banks){
 			if(b.getCode().equals(this.code)){
 				throw new BankException();
