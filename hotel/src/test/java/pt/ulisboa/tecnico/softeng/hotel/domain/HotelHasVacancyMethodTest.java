@@ -34,7 +34,7 @@ public class HotelHasVacancyMethodTest {
 	}
 
 	/*Testa indisponibilidade:
-			19 20 21 22 23 24
+	        19 20 21 22 23 24
 	Ocupado:   X  X  X  X
 	T01:          X  X
 	T02:    X  X  X
