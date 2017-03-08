@@ -44,7 +44,6 @@ public class AccountDepositMethodTest {
 		exception.expect(BankException.class);
 		this.account.deposit(-20);
 	}
-	
 	@After
 	public void tearDown() {
 		Bank.banks.clear();
