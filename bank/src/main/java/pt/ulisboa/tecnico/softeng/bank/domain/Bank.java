@@ -78,6 +78,10 @@ public class Bank {
 
 	public Account getAccount(String IBAN) {
 		
+		/* Null IBAN */
+		if(IBAN == null || IBAN == "")
+			throw new BankException();
+		
 		/* Bank with no accounts */
 		
 		if( this.accounts.size() == 0 ){

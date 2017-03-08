@@ -65,6 +65,21 @@ public class BankHasAccountMethodTest {
 		
 	}
 	
+	@Test
+	public void nullArg(){
+		
+		exception.expect(BankException.class);
+		this.bank.getAccount(null);
+		
+	}
+	@Test
+	public void emptyArg(){
+		
+		exception.expect(BankException.class);
+		this.bank.getAccount("");
+		
+	}
+	
 	@After
 	public void tearDown() {
 		Bank.banks.clear();
