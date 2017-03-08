@@ -46,7 +46,7 @@ public class Adventure {
 	}
 
 	public LocalDate getBegin() {
-		return this.begin;
+		return this.begin; 
 	}
 
 	public LocalDate getEnd() {
