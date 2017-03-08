@@ -79,7 +79,7 @@ public class Bank {
 	public Account getAccount(String IBAN) {
 		
 		/* Null IBAN */
-		if(IBAN == null || IBAN == "")
+		if( IBAN == null || IBAN == "" || IBAN.contains(" ") )
 			throw new BankException();
 		
 		/* Bank with no accounts */
