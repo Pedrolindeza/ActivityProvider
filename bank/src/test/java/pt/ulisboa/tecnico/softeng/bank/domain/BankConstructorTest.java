@@ -17,9 +17,7 @@ public class BankConstructorTest {
 	public ExpectedException exception = ExpectedException.none();
 	
 	@Before
-	public void setUp() {
-
-	}
+	public void setUp() {}
 
 	@Test
 	public void success() {
@@ -33,20 +31,57 @@ public class BankConstructorTest {
 	}
 
 	@Test(expected = BankException.class)
-	public void nullString(){
-		Bank bank = new Bank(null,null);
+	public void nullName(){
+		new Bank(null,"BK06");
+		
+	}
+	
+	@Test(expected = BankException.class)
+	public void nullCode(){
+		new Bank("MoneyMoney",null);
+		
+	}
+	
+	@Test(expected = BankException.class)
+	public void emptyName(){
+		new Bank("","BK01");
+		
+	}
+	
+	@Test(expected = BankException.class)
+	public void blankName(){
+		new Bank("  ","BK01");
+		
+	}
+
+	@Test(expected = BankException.class)
+	public void emptyCode(){
+		new Bank("Money33","");
+		
+	}
+	
+	@Test(expected = BankException.class)
+	public void blankCode(){
+		new Bank("Money33","  ");
 		
 	}
 	
 	@Test(expected = BankException.class)
 	public void sameCode(){
-		new Bank("Money2","BK01");
+		new Bank("Money8", "BK03");
+		new Bank("Money2","BK03");
 		
 	}
 	
 	@Test(expected = BankException.class)
-	public void dimCode(){
+	public void bigCode(){
 		new Bank("Money3","BK012");
+		
+	}
+
+	@Test(expected = BankException.class)
+	public void smallCode(){
+		new Bank("Money4","BK2");
 		
 	}
 

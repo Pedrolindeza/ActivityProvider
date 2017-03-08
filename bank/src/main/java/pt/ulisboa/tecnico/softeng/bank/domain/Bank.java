@@ -20,7 +20,7 @@ public class Bank {
 
 	public Bank(String name, String code) {
 		checkCode(code);
-		if (name == null){
+		if (name == null || (name.trim().length() < 1)){
 			throw new BankException();
 		}
 		this.name = name;
@@ -38,7 +38,7 @@ public class Bank {
 		}
 		
 		for(Bank b : banks){
-			if(b.getCode().equals(this.code)){
+			if(b.getCode().equals(code)){
 				throw new BankException();
 			}
 		}

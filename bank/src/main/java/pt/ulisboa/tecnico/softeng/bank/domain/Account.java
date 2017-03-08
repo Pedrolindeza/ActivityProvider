@@ -17,6 +17,11 @@ public class Account {
 		}
 		
 		
+		if (bank.hasClient(client) == false) {
+				throw new BankException();
+		}
+	
+
 		this.bank = bank;
 		this.IBAN = bank.getCode() + Integer.toString(++Account.counter);
 		this.client = client;

@@ -9,7 +9,7 @@ public class Client {
 	private final String ID;
 
 	public Client(Bank bank, String name) {
-		if (bank == null || name.length() == 0 ){
+		if (bank == null || name == null || (name.trim().length()  < 1)){
 			throw new BankException();
 		}
 		this.ID = Integer.toString(++Client.counter);
