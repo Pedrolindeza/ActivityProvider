@@ -16,6 +16,7 @@ public class AccountWithdrawMethodTest {
 	@Rule
 	public ExpectedException exception = ExpectedException.none();
 	
+	
 	@Before
 	public void setUp() {
 		this.bank = new Bank("Money", "BK01");
