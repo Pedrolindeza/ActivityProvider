@@ -31,22 +31,22 @@ public class ActivityConstructorMethodTest {
 
 	@Test(expected = ActivityException.class)
  	public void minAgeTest(){
-		Activity activity = new Activity(this.provider, "Bush Walking", 10, 80, 25);
+		new Activity(this.provider, "Bush Walking", 10, 80, 25);
  	}
 
  	@Test(expected = ActivityException.class)
  	public void maxAgeTest(){
-		Activity activity = new Activity(this.provider, "Bush Walking", 18, 100, 25);
+		new Activity(this.provider, "Bush Walking", 18, 100, 25);
  	}
 
  	@Test(expected = ActivityException.class)
  	public void AgeTest(){
-		Activity activity = new Activity(this.provider, "Bush Walking", 40, 20, 25);
+		new Activity(this.provider, "Bush Walking", 40, 20, 25);
  	}
 
  	@Test(expected = ActivityException.class)
  	public void capacityTest(){
-		Activity activity = new Activity(this.provider, "Bush Walking", 18, 80, 0);
+		new Activity(this.provider, "Bush Walking", 18, 80, 0);
  	}
 
 	@After
