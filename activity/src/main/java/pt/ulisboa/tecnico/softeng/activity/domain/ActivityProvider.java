@@ -38,6 +38,12 @@ public class ActivityProvider {
 	}
 
 	public void checkName(String name){
+		if (name == ""){
+			throw new ActivityException();
+		}
+		if (name.trim().length() == 0){
+			throw new ActivityException();
+		}
 		for (ActivityProvider provider: providers){
 			if(provider.getName().equals(name)){
 				throw new ActivityException();

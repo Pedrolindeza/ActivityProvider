@@ -24,49 +24,68 @@ public class ActivityProviderConstructorMethodTest {
 		Assert.assertEquals(0, provider.getNumberOfActivities());
 	}
 
-	@Test // -> excepted = ActivityException.class
-	public void nullActivityProvider(){
+	@Test //excepted = NullPointerException.class
+	public void nullCodeActivityProvider(){
 		exception.expect(NullPointerException.class);
-		new ActivityProvider(null,null);
+		new ActivityProvider(null,"Adventure++");
 	}
 
-	@Test//HEYY  excepted = ActivityException.class
+	@Test //excepted = NullPointerException.class
+	public void nullNameActivityProvider(){
+		exception.expect(NullPointerException.class);
+		new ActivityProvider("XtremX",null);
+	}
+
+	@Test//excepted = ActivityException.class
 	public void emptyCode(){
 		exception.expect(ActivityException.class);
 		new ActivityProvider("","Adventure++");
 	}
 
-	@Test//HEYY excepted = ActivityException.class
+	@Test//excepted = ActivityException.class
+	public void emptyName(){
+		exception.expect(ActivityException.class);
+		new ActivityProvider("XtremX","");
+	}
+
+	@Test//excepted = ActivityException.class
 	public void blankCode(){
 		exception.expect(ActivityException.class);
 		new ActivityProvider(" ","Adventure++");
 	}
 
-	@Test//HEYY excepted = ActivityException.class
+	@Test//excepted = ActivityException.class
+	public void blankName(){
+		exception.expect(ActivityException.class);
+		new ActivityProvider("XtremX"," ");
+	}
+	
+	@Test//excepted = ActivityException.class
 	public void bigCode(){
 		exception.expect(ActivityException.class);
 		new ActivityProvider("XtremXX","Adventure++");
 	}
 
-	@Test//HEYY excepted = ActivityException.class
+	@Test//excepted = ActivityException.class
 	public void smallCode(){
 		exception.expect(ActivityException.class);
 		new ActivityProvider("Xtrem","Adventure++");
 	}
-	@Test//-> excepted = ActivityException.class
+	@Test//excepted = ActivityException.class
 	public void notUniqueCode(){
 		exception.expect(ActivityException.class);
 		new ActivityProvider("XtremX","Adventure+");
 		new ActivityProvider("XtremX","Adventure++");
 	}
 
-	@Test//-> excepted = ActivityException.class
+	@Test//excepted = ActivityException.class
 	public void notUniqueName(){
 		exception.expect(ActivityException.class);
-		new ActivityProvider("XtremZ","Adventure++");
+		new ActivityProvider("XtremX","Adventure++");
 		new ActivityProvider("XtremY","Adventure++");
 	}
 
+	
 	@After
 	public void tearDown() {
 		ActivityProvider.providers.clear();
