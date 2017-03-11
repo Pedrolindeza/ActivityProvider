@@ -11,6 +11,7 @@ public class Booking {
 	private final LocalDate departure;
 
 	Booking(Hotel hotel, LocalDate arrival, LocalDate departure) {
+		/*Hotel - Task 3*/
 		if (arrival.isAfter(departure)){
 			throw new HotelException("Departure date must be after arrival date");
 		}
@@ -39,9 +40,6 @@ public class Booking {
 			return true;
 		}
 		if (arrival.isBefore(this.arrival) && departure.isAfter(this.departure)) {
-			return true;
-		}
-		if (arrival.isEqual(this.arrival) || departure.isEqual(this.departure)) {
 			return true;
 		}
 		return false;
