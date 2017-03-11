@@ -33,6 +33,10 @@ public class Booking {
 	}
 
 	boolean conflict(LocalDate arrival, LocalDate departure) {
+		/*Hotel - Task 4*/
+		if (departure.isEqual(this.departure) || arrival.isEqual(this.arrival)) {
+			return true;
+		}
 		if (arrival.isAfter(this.arrival) && arrival.isBefore(this.departure)) {
 			return true;
 		}
