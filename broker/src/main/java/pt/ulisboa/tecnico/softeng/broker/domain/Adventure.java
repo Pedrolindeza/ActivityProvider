@@ -4,6 +4,7 @@ import org.joda.time.LocalDate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import pt.ulisboa.tecnico.softeng.broker.exception.BrokerException;
 import pt.ulisboa.tecnico.softeng.broker.interfaces.ActivityInterface;
 import pt.ulisboa.tecnico.softeng.broker.interfaces.BankInterface;
 import pt.ulisboa.tecnico.softeng.broker.interfaces.HotelInterface;
@@ -26,6 +27,15 @@ public class Adventure {
 	private String activityBooking;
 
 	public Adventure(Broker broker, LocalDate begin, LocalDate end, int age, String IBAN, int amount) {
+		
+		if( broker == null || begin == null || end == null || 
+				age < 18 || age > 99 || amount < 0 ||
+				IBAN == "" || IBAN == null  )
+			throw new BrokerException();
+		
+		if(!dateCompare(begin, end))
+			throw new BrokerException(); 
+		
 		this.ID = broker.getCode() + Integer.toString(++counter);
 		this.broker = broker;
 		this.begin = begin;
@@ -39,6 +49,10 @@ public class Adventure {
 
 	public String getID() {
 		return this.ID;
+	}
+	
+	public Boolean dateCompare(LocalDate begin, LocalDate end){
+		return (end.isAfter(begin));
 	}
 
 	public Broker getBroker() {

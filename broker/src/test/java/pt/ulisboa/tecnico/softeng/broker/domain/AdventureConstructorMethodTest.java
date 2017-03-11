@@ -4,10 +4,17 @@ import org.joda.time.LocalDate;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
+
+import pt.ulisboa.tecnico.softeng.broker.exception.BrokerException;
 
 public class AdventureConstructorMethodTest {
 	private Broker broker;
+	
+	@Rule
+	public ExpectedException exception = ExpectedException.none();
 
 	@Before
 	public void setUp() {
@@ -33,7 +40,48 @@ public class AdventureConstructorMethodTest {
 		Assert.assertNull(adventure.getActivityBooking());
 		Assert.assertNull(adventure.getRoomBooking());
 	}
+	
+	/* Argumentos Inconsistentes */
+	
+	@SuppressWarnings("unused")
+	@Test
+	public void invalideDates(){
+		
+		exception.expect(BrokerException.class);
+		LocalDate begin = new LocalDate(2016, 12, 19);
+		LocalDate end = new LocalDate(2016, 12, 21);
 
+		Adventure adventure = new Adventure(this.broker, end, begin, 20, "BK011234567", 300);
+	}
+	
+	@SuppressWarnings("unused")
+	@Test
+	public void nullArgs(){
+		exception.expect(BrokerException.class);
+		Adventure adventure = new Adventure(null, null, null, 0, "", 0);
+	}
+	
+	@SuppressWarnings("unused")
+	@Test
+	public void underAge(){
+		exception.expect(BrokerException.class);
+		LocalDate begin = new LocalDate(2016, 12, 19);
+		LocalDate end = new LocalDate(2016, 12, 21);
+
+		Adventure adventure = new Adventure(this.broker, begin, end, 5, "BK011234567", 300);
+	}
+	
+	@SuppressWarnings("unused")
+	@Test
+	public void negativeAmount(){
+		exception.expect(BrokerException.class);
+		LocalDate begin = new LocalDate(2016, 12, 19);
+		LocalDate end = new LocalDate(2016, 12, 21);
+
+		Adventure adventure = new Adventure(this.broker, begin, end, 5, "BK011234567", -25);
+	}
+	
+	
 	@After
 	public void tearDown() {
 		Broker.brokers.clear();
