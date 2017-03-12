@@ -37,6 +37,25 @@ public class ActivityOfferConstructorMethodTest {
 		
 		ActivityOffer offer = new ActivityOffer(this.activity, begin, end);
 	}
+	
+	@Test(expected = ActivityException.class)
+	public void nullActivity(){
+		LocalDate begin = new LocalDate(2016, 10, 10);
+		LocalDate end = new LocalDate(2016,5, 5);
+		ActivityOffer offer = new ActivityOffer(null, begin, end);
+	}
+	
+	@Test(expected = ActivityException.class)
+	public void nullBeginDate(){
+		LocalDate end = new LocalDate(2016,5, 5);
+		ActivityOffer offer = new ActivityOffer(this.activity, null, end);
+	}
+	
+	@Test(expected = ActivityException.class)
+	public void nullEndDate(){
+		LocalDate begin = new LocalDate(2016,5, 5);
+		ActivityOffer offer = new ActivityOffer(this.activity, begin, null);
+	}
 
 	@After
 	public void tearDown() {

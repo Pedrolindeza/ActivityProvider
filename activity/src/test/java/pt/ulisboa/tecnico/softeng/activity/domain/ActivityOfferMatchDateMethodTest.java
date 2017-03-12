@@ -24,6 +24,16 @@ public class ActivityOfferMatchDateMethodTest {
 	public void success() {
 		Assert.assertTrue(this.offer.matchDate(new LocalDate(2016, 12, 19), new LocalDate(2016, 12, 21)));
 	}
+	
+	@Test
+	public void diffBeginDate() {
+		Assert.assertFalse(this.offer.matchDate(new LocalDate(2016, 11, 19), new LocalDate(2016, 12, 21)));
+	}
+	
+	@Test
+	public void diffEndDate() {
+		Assert.assertFalse(this.offer.matchDate(new LocalDate(2016, 12, 19), new LocalDate(2016, 11, 21)));
+	}
 
 	@After
 	public void tearDown() {
