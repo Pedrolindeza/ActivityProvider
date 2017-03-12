@@ -32,12 +32,10 @@ public class BookingContructorMethodTest {
 	}
 	
 	@Test(expected = ActivityException.class)
-	public void capacityFull() {
+	public void bookingsExceedCapacity() {
 		Booking booking;
-		while(offer.hasVacancy())
+		while(true)
 			booking = new Booking(this.provider, this.offer);
-		booking = new Booking(this.provider, this.offer);
-		
 	}
 
 	@After

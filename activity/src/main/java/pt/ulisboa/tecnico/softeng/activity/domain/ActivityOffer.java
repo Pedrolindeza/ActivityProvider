@@ -40,8 +40,10 @@ public class ActivityOffer {
 	}
 
 	void addBooking(Booking booking) {
-		this.bookings.add(booking);
-
+		if(!this.hasVacancy())
+			throw new ActivityException("Number of bookings equals capacity");
+		else
+			this.bookings.add(booking);
 	}
 
 	boolean available(LocalDate begin, LocalDate end) {
