@@ -34,7 +34,7 @@ public class Adventure {
 			throw new BrokerException();
 		
 		if(!dateCompare(begin, end))
-			throw new BrokerException(); 
+			throw new BrokerException();
 		
 		this.ID = broker.getCode() + Integer.toString(++counter);
 		this.broker = broker;
@@ -52,7 +52,7 @@ public class Adventure {
 	}
 	
 	public Boolean dateCompare(LocalDate begin, LocalDate end){
-		return (end.isAfter(begin));
+		return (end.isAfter(begin) || end.equals(begin) );
 	}
 
 	public Broker getBroker() {
