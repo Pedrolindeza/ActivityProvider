@@ -8,7 +8,9 @@ public class Booking {
 	private final String reference;
 
 	public Booking(ActivityProvider provider, ActivityOffer offer) {
-		try {
+		if(provider == null || offer == null)
+			throw new ActivityException();
+		try {	
 			this.reference = provider.getCode() + Integer.toString(++Booking.counter);
 			offer.addBooking(this);
 		}

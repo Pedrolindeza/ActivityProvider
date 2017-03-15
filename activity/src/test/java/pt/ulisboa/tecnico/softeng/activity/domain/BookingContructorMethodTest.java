@@ -37,6 +37,18 @@ public class BookingContructorMethodTest {
 		while(true)
 			booking = new Booking(this.provider, this.offer);
 	}
+	
+	@Test(expected = ActivityException.class)
+	public void nullProvider() {
+		Booking booking = new Booking(null, this.offer);
+	}
+	
+	@Test(expected = ActivityException.class)
+	public void nullOffer() {
+		Booking booking = new Booking(this.provider, null);
+	}
+	
+	
 
 	@After
 	public void tearDown() {
