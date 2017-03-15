@@ -22,7 +22,7 @@ public class Activity {
 	private final Set<ActivityOffer> offers = new HashSet<>();
 
 	public Activity(ActivityProvider provider, String name, int minAge, int maxAge, int capacity) {
-
+		checkName(name);
 		checkAge(minAge, maxAge);
 		checkCapacity(capacity);
 
@@ -35,6 +35,12 @@ public class Activity {
 		provider.addActivity(this);
 	}
 
+	private void checkName(String name){
+		if (name == null){
+			throw new ActivityException();
+		}
+	}
+	
 	private void checkAge(int minAge, int maxAge){
 		if(minAge < MIN_AGE || maxAge > MAX_AGE || minAge > maxAge){
 			throw new ActivityException();

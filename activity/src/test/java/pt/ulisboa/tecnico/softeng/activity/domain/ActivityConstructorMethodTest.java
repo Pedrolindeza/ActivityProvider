@@ -49,6 +49,11 @@ public class ActivityConstructorMethodTest {
 		new Activity(this.provider, "Bush Walking", 18, 80, 0);
  	}
 
+ 	@Test(expected = ActivityException.class)
+ 	public void nameTest(){
+ 		new Activity(this.provider,null, 18, 80, 0);
+ 	}
+
 	@After
 	public void tearDown() {
 		ActivityProvider.providers.clear();

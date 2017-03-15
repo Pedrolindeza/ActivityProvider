@@ -14,6 +14,7 @@ public class ActivityOffer {
 	private final Set<Booking> bookings = new HashSet<>();
 
 	public ActivityOffer(Activity activity, LocalDate begin, LocalDate end) {
+		checkDate(begin, end);
 		if(begin.isAfter(end))
 			throw new ActivityException("End date before begin date");
 		else {
@@ -22,6 +23,12 @@ public class ActivityOffer {
 			this.capacity = activity.getCapacity();
 	
 			activity.addOffer(this);
+		}
+	}
+
+	public void checkDate(LocalDate begin, LocalDate end){
+		if (begin == null || end == null){
+			throw new ActivityException();
 		}
 	}
 

@@ -11,9 +11,6 @@ import pt.ulisboa.tecnico.softeng.activity.domain.exception.ActivityException;
 
 public class ActivityProviderConstructorMethodTest {
 
-	@Rule
-    public ExpectedException exception = ExpectedException.none();
-
 	@Test
 	public void success() {
 		ActivityProvider provider = new ActivityProvider("XtremX", "Adventure++");
@@ -24,63 +21,53 @@ public class ActivityProviderConstructorMethodTest {
 		Assert.assertEquals(0, provider.getNumberOfActivities());
 	}
 
-	@Test //excepted = NullPointerException.class
+	@Test(expected = ActivityException.class)
 	public void nullCodeActivityProvider(){
-		exception.expect(NullPointerException.class);
 		new ActivityProvider(null,"Adventure++");
 	}
 
-	@Test //excepted = NullPointerException.class
+	@Test(expected = ActivityException.class)
 	public void nullNameActivityProvider(){
-		exception.expect(NullPointerException.class);
 		new ActivityProvider("XtremX",null);
 	}
 
-	@Test//excepted = ActivityException.class
+	@Test(expected = ActivityException.class)
 	public void emptyCode(){
-		exception.expect(ActivityException.class);
 		new ActivityProvider("","Adventure++");
 	}
 
-	@Test//excepted = ActivityException.class
+	@Test(expected = ActivityException.class)
 	public void emptyName(){
-		exception.expect(ActivityException.class);
 		new ActivityProvider("XtremX","");
 	}
 
-	@Test//excepted = ActivityException.class
+	@Test(expected = ActivityException.class)
 	public void blankCode(){
-		exception.expect(ActivityException.class);
 		new ActivityProvider(" ","Adventure++");
 	}
 
-	@Test//excepted = ActivityException.class
+	@Test(expected = ActivityException.class)
 	public void blankName(){
-		exception.expect(ActivityException.class);
 		new ActivityProvider("XtremX"," ");
 	}
 	
-	@Test//excepted = ActivityException.class
+	@Test(expected = ActivityException.class)
 	public void bigCode(){
-		exception.expect(ActivityException.class);
 		new ActivityProvider("XtremXX","Adventure++");
 	}
 
-	@Test//excepted = ActivityException.class
+	@Test(expected = ActivityException.class)
 	public void smallCode(){
-		exception.expect(ActivityException.class);
 		new ActivityProvider("Xtrem","Adventure++");
 	}
-	@Test//excepted = ActivityException.class
+	@Test(expected = ActivityException.class)
 	public void notUniqueCode(){
-		exception.expect(ActivityException.class);
 		new ActivityProvider("XtremX","Adventure+");
 		new ActivityProvider("XtremX","Adventure++");
 	}
 
-	@Test//excepted = ActivityException.class
+	@Test(expected = ActivityException.class)
 	public void notUniqueName(){
-		exception.expect(ActivityException.class);
 		new ActivityProvider("XtremX","Adventure++");
 		new ActivityProvider("XtremY","Adventure++");
 	}

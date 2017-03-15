@@ -7,6 +7,10 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.Rule;
+import org.junit.rules.ExpectedException;
+
+import pt.ulisboa.tecnico.softeng.activity.domain.exception.ActivityException;
 
 public class ActivityProviderFindOfferMethodTest {
 	private ActivityProvider provider;
@@ -33,9 +37,34 @@ public class ActivityProviderFindOfferMethodTest {
 		Assert.assertTrue(offers.contains(this.offer));
 	}
 
+	@Test(expected = ActivityException.class)
+	public void beginNull(){
+		LocalDate end = new LocalDate(2016, 12, 21);
+		this.provider.findOffer(null, end, 40);
+	}
+
+	@Test(expected = ActivityException.class)
+	public void endNull(){
+		LocalDate begin = new LocalDate(2016, 12, 19);
+		this.provider.findOffer(begin, null, 40);
+	}
+
+	@Test(expected = ActivityException.class)
+	public void zeroAge(){
+		LocalDate begin = new LocalDate(2016, 12, 19);
+		LocalDate end = new LocalDate(2016, 12, 21);
+		this.provider.findOffer(begin, end, 0);
+	}
+
+	@Test(expected = ActivityException.class)
+	public void incompatibleDate(){
+		LocalDate begin = new LocalDate(2016, 12, 21);
+		LocalDate end = new LocalDate(2016, 12, 19);
+		this.provider.findOffer(begin, end, 0);
+	}
+
 	@After
 	public void tearDown() {
 		ActivityProvider.providers.clear();
 	}
-
 }

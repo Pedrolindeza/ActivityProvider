@@ -27,7 +27,7 @@ public class ActivityProvider {
 	}
 
 	public void checkCode(String code){
-		if (code.length() != ActivityProvider.CODE_SIZE){
+		if (code == null || code.length() != ActivityProvider.CODE_SIZE){
 			throw new ActivityException();
 		}
 		for (ActivityProvider provider: providers){
@@ -38,12 +38,10 @@ public class ActivityProvider {
 	}
 
 	public void checkName(String name){
-		if (name == ""){
+		if (name == null || name == ""||name.trim().length() == 0){
 			throw new ActivityException();
 		}
-		if (name.trim().length() == 0){
-			throw new ActivityException();
-		}
+
 		for (ActivityProvider provider: providers){
 			if(provider.getName().equals(name)){
 				throw new ActivityException();
@@ -68,7 +66,11 @@ public class ActivityProvider {
 	}
 
 	public Set<ActivityOffer> findOffer(LocalDate begin, LocalDate end, int age) {
+
 		Set<ActivityOffer> result = new HashSet<>();
+		if (begin == null || end == null || age ==0 ||begin.isAfter(end)){
+			throw new ActivityException();
+		}
 		for (Activity activity : this.activities) {
 			result.addAll(activity.getOffers(begin, end, age));
 		}
