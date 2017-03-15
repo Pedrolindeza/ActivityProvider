@@ -56,29 +56,6 @@ public class HotelConstructorTest {
 		Hotel hotel = new Hotel("XP11po0943", "Londres");
 	}
 	
-	@Test
-	public void roomExistenceMethod(){
-		Hotel hotel = new Hotel("XPTO123", "Londres");
-		Room room = new Room(hotel, "01", Type.DOUBLE);
-		Assert.assertEquals(true, hotel.roomExistence("01"));
-		Assert.assertEquals(false, hotel.roomExistence("02"));
-	}
-	@Test
-	public void addRoomMethodSuccess(){
-		Hotel hotel = new Hotel("XPTO123", "Londres");
-		Assert.assertEquals(false, hotel.roomExistence("01"));
-		
-		Room room = new Room(hotel, "01", Type.DOUBLE);
-		Assert.assertEquals(true, hotel.roomExistence("01"));
-	}
-	
-	@Test(expected = HotelException.class)
-	public void addRoomMethodFail(){
-		Hotel hotel = new Hotel("XPTO123", "Londres");
-		Room room = new Room(hotel, "01", Type.DOUBLE);
-		Room room2 = new Room(hotel, "01", Type.DOUBLE);
-	}
-
 	@After
 	public void tearDown() {
 		Hotel.hotels.clear();
