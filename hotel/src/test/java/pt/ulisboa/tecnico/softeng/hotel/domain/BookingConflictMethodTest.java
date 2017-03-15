@@ -39,7 +39,7 @@ C3						X 	X 	X
 
 		Assert.assertFalse(this.booking.conflict(arrival, departure));
 	}
-
+/*Hotel - Task 4*/
 	@Test
 	public void noConflict1(){
 		LocalDate arrival = new LocalDate(2016, 12, 20);

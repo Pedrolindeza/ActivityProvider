@@ -11,8 +11,9 @@ public class Booking {
 	private final LocalDate departure;
 
 	Booking(Hotel hotel, LocalDate arrival, LocalDate departure) {
-		if (arrival.isAfter(departure)){
-			throw new HotelException("Departure date must be after arrival date");
+		/*Hotel - Task 3*/
+		if (arrival==null || departure==null || hotel==null || arrival.isAfter(departure) ){
+			throw new HotelException();
 		}
 		this.reference = hotel.getCode() + Integer.toString(++Booking.counter);
 		this.arrival = arrival;
@@ -32,6 +33,10 @@ public class Booking {
 	}
 
 	boolean conflict(LocalDate arrival, LocalDate departure) {
+		/*Hotel - Task 4*/
+		if (departure.isEqual(this.departure) || arrival.isEqual(this.arrival)) {
+			return true;
+		}
 		if (arrival.isAfter(this.arrival) && arrival.isBefore(this.departure)) {
 			return true;
 		}
@@ -39,9 +44,6 @@ public class Booking {
 			return true;
 		}
 		if (arrival.isBefore(this.arrival) && departure.isAfter(this.departure)) {
-			return true;
-		}
-		if (arrival.isEqual(this.arrival) || departure.isEqual(this.departure)) {
 			return true;
 		}
 		return false;

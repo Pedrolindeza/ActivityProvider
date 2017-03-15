@@ -7,6 +7,7 @@ import java.util.Set;
 
 import pt.ulisboa.tecnico.softeng.bank.exception.BankException;
 
+
 public class Bank {
 	public static Set<Bank> banks = new HashSet<>();
 

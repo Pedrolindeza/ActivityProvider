@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import pt.ulisboa.tecnico.softeng.broker.exception.BrokerException;
 
 public class Broker {
+	@SuppressWarnings("unused")
 	private static Logger logger = LoggerFactory.getLogger(Broker.class);
 
 	public static Set<Broker> brokers = new HashSet<>();
@@ -18,6 +19,11 @@ public class Broker {
 	private final Set<Adventure> adventures = new HashSet<>();
 
 	public Broker(String code, String name) {
+		
+		if( code == null || code == "" || name == null || name == ""){
+			throw new BrokerException();
+		}
+		
 		checkCode(code);
 		this.code = code;
 

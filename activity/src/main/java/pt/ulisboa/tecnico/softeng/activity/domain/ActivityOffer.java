@@ -14,8 +14,9 @@ public class ActivityOffer {
 	private final Set<Booking> bookings = new HashSet<>();
 
 	public ActivityOffer(Activity activity, LocalDate begin, LocalDate end) {
-		checkDate(begin, end);
-		if(begin.isAfter(end))
+		if(activity == null || begin == null || end == null)
+			throw new ActivityException("One argument is null");
+		else if(begin.isAfter(end))
 			throw new ActivityException("End date before begin date");
 		else {
 			this.begin = begin;
@@ -23,12 +24,6 @@ public class ActivityOffer {
 			this.capacity = activity.getCapacity();
 	
 			activity.addOffer(this);
-		}
-	}
-
-	public void checkDate(LocalDate begin, LocalDate end){
-		if (begin == null || end == null){
-			throw new ActivityException();
 		}
 	}
 
@@ -45,8 +40,10 @@ public class ActivityOffer {
 	}
 
 	void addBooking(Booking booking) {
-		this.bookings.add(booking);
-
+		if(!this.hasVacancy())
+			throw new ActivityException("Number of bookings equals capacity");
+		else
+			this.bookings.add(booking);
 	}
 
 	boolean available(LocalDate begin, LocalDate end) {

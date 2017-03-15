@@ -18,29 +18,29 @@ public class Hotel {
 
 	public Hotel(String code, String name) {
 		checkCode(code);
-
+		checkName(name);
 		this.code = code;
 		this.name = name;
 		Hotel.hotels.add(this);
 	}
-
+	private void checkName(String name){
+		if (name==null || name=="")
+			throw new HotelException("Argumentos null \nclasse: Hotel \nmétodo: checkName\n");
+	}
 	private void checkCode(String code) {
-		if (code==null) {
-			throw new HotelException();
-		}
-		if (code.length() != Hotel.CODE_SIZE) {
-			throw new HotelException();
+		if ((code==null) || (code.length() != Hotel.CODE_SIZE)) {
+			throw new HotelException("Argumentos null \nclasse: Hotel \nmétodo: checkCode\n");
 		}
 		for(Hotel h : hotels){
 			if(h.getCode().equals(code)){
-				throw new HotelException();
+				throw new HotelException("Hotel existente!");
 			}
 		}
 	}
 
 	public Room hasVacancy(Room.Type type, LocalDate arrival, LocalDate departure) {
 		if (type == null || arrival == null || departure == null){
-			throw new HotelException("Invalid arguments.");
+			throw new HotelException("Argumentos null \nclasse: Hotel \nmétodo: hasVacancy\n");
 		}
 		for (Room room : this.rooms) {
 			if (room.isFree(type, arrival, departure)) {
@@ -53,7 +53,7 @@ public class Hotel {
 	String getCode() {
 		return this.code;
 	}
-	public boolean getRoom(String number){
+	public boolean roomExistence(String number){
 		for(Room r : rooms){
 			if(r.getNumber().equals(number)){
 				return true;
@@ -70,8 +70,8 @@ public class Hotel {
 	}
 	void addRoom(Room room) {
 
-		if(getRoom(room.getNumber())){
-			throw new HotelException();
+		if(roomExistence(room.getNumber())){
+			throw new HotelException("Quarto existente!");
 		}
 		this.rooms.add(room);
 	}
@@ -81,6 +81,8 @@ public class Hotel {
 	}
 
 	public static String reserveHotel(Room.Type type, LocalDate arrival, LocalDate departure) {
+		if(type==null || arrival==null || departure==null)
+			throw new HotelException("Argumentos null \nclasse: Hotel \nmétodo: reserveHotel\n");
 		for (Hotel hotel : Hotel.hotels) {
 			Room room = hotel.hasVacancy(type, arrival, departure);
 			if (room != null) {

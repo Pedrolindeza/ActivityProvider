@@ -27,20 +27,28 @@ public class RoomConstructorMethodTest {
 	}
 	
 	@Test(expected = HotelException.class)
-	public void integer(){
-		Room room = new Room(this.hotel, "s01", Type.DOUBLE);
+	public void notInteger(){
+		Room room = new Room(this.hotel, "0sdas01", Type.DOUBLE);
+	}
+	@Test(expected = HotelException.class)
+	public void hotelNull(){
+		Room room = new Room(null, "01", Type.DOUBLE);
+	}
+	@Test(expected = HotelException.class)
+	public void numberNull(){
+		Room room = new Room(this.hotel, null , Type.DOUBLE);
+	}
+	@Test(expected = HotelException.class)
+	public void typeNull(){
+		Room room = new Room(this.hotel, "s01", null);
 	}
 	
 	@Test(expected = HotelException.class)
-	public void unique(){
+	public void notUnique(){
 		Room room = new Room(this.hotel, "01", Type.DOUBLE);
 		Room room2 = new Room(this.hotel, "01", Type.DOUBLE);
 	}
 
-	@Test(expected = HotelException.class)
-	public void notNull(){
-		Room room = new Room(this.hotel, null, Type.DOUBLE);
-	}
 	@After
 	public void tearDown() {
 		Hotel.hotels.clear();

@@ -22,21 +22,21 @@ public class Room {
 	private final Set<Booking> bookings = new HashSet<>();
 
 	public Room(Hotel hotel, String number, Type type) {
-		check(number);
+		check(number,hotel,type);
 		this.hotel = hotel;
 		this.number = number;
 		this.type = type;
 
 		this.hotel.addRoom(this);
 	}
-	public void check(String number){
-		if(number==null){
-			throw new HotelException();
+	public void check(String number, Hotel hotel, Type type){
+		if(number==null || hotel==null || type==null){
+			throw new HotelException("Argumentos null \nclasse: Room \nmétodo: check\n");
 		}
 		try {
 		    int inteiro = Integer.parseInt(number);
 		} catch (NumberFormatException e) {
-			throw new HotelException();
+			throw new HotelException("Not a number!\n");
 		}
 		
 	}
@@ -67,8 +67,8 @@ public class Room {
 	}
 
 	public Booking reserve(Type type, LocalDate arrival, LocalDate departure) {
-		if (!isFree(type, arrival, departure)) {
-			throw new HotelException();
+		if (type==null || arrival==null || departure==null || !isFree(type, arrival, departure)) {
+			throw new HotelException("Argumentos null \nclasse: Room \nmétodo: reserve\n");
 		}
 
 		Booking booking = new Booking(this.hotel, arrival, departure);

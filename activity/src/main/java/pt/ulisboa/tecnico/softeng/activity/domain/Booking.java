@@ -8,15 +8,15 @@ public class Booking {
 	private final String reference;
 
 	public Booking(ActivityProvider provider, ActivityOffer offer) {
-		
-		if(!offer.hasVacancy())
-			throw new ActivityException("Number of bookings equals capacity");
-		else {
+		if(provider == null || offer == null)
+			throw new ActivityException();
+		try {	
 			this.reference = provider.getCode() + Integer.toString(++Booking.counter);
-			
 			offer.addBooking(this);
 		}
-			
+		catch (ActivityException e) {
+			throw new ActivityException("Can't create the booking, offer's capacity is full");
+		}
 	}
 
 	public String getReference() {
