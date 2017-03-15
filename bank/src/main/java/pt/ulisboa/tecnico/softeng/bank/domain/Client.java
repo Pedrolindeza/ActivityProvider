@@ -2,6 +2,7 @@ package pt.ulisboa.tecnico.softeng.bank.domain;
 
 import pt.ulisboa.tecnico.softeng.bank.exception.BankException;
 
+
 public class Client {
 	private static int counter = 0;
 
