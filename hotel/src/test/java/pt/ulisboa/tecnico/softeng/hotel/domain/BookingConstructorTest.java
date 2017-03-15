@@ -8,8 +8,6 @@ import org.junit.Test;
 import pt.ulisboa.tecnico.softeng.hotel.exception.HotelException;
 
 public class BookingConstructorTest {
-	@Rule
-	public ExpectedException exception = ExpectedException.none();
 	
 	@Test
 	public void success() {
@@ -26,24 +24,36 @@ public class BookingConstructorTest {
 		Assert.assertEquals(departure, booking.getDeparture());
 	}
 /*Hotel - Task 3*/
-	@Test
+	@Test(expected = HotelException.class)
+	public void nullHotel() {
+		LocalDate arrival = new LocalDate(2016, 12, 19);
+		LocalDate departure = new LocalDate(2016, 12, 21);
+
+		Booking booking = new Booking(null, arrival, departure);	
+	}
+
+	@Test(expected = HotelException.class)
+	public void nullArrival() {
+		Hotel hotel = new Hotel("XPTO123", "Londres");
+		LocalDate departure = new LocalDate(2016, 12, 19);
+
+		Booking booking = new Booking(hotel, null, departure);	
+	}
+	
+	@Test(expected = HotelException.class)
+	public void nullDeparure() {
+		Hotel hotel = new Hotel("XPTO123", "Londres");
+		LocalDate arrival = new LocalDate(2016, 12, 19);
+
+		Booking booking = new Booking(hotel, arrival, null);	
+	}
+
+	@Test(expected = HotelException.class)
 	public void switchedDates() {
 		Hotel hotel = new Hotel("XPTO123", "Londres");
-
 		LocalDate arrival = new LocalDate(2016, 12, 21);
 		LocalDate departure = new LocalDate(2016, 12, 19);
 
-		exception.expect(HotelException.class);
-		Booking booking = new Booking(hotel, arrival, departure);	
-	}
-	@Test
-	public void nullDates() {
-		Hotel hotel = new Hotel("XPTO123", "Londres");
-
-		LocalDate arrival = null;
-		LocalDate departure = null;
-
-		exception.expect(NullPointerException.class);
 		Booking booking = new Booking(hotel, arrival, departure);	
 	}
 	

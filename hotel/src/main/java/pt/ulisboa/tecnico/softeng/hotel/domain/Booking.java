@@ -12,8 +12,8 @@ public class Booking {
 
 	Booking(Hotel hotel, LocalDate arrival, LocalDate departure) {
 		/*Hotel - Task 3*/
-		if (arrival.isAfter(departure)){
-			throw new HotelException("Departure date must be after arrival date");
+		if (arrival==null || departure==null || hotel==null || arrival.isAfter(departure) ){
+			throw new HotelException();
 		}
 		this.reference = hotel.getCode() + Integer.toString(++Booking.counter);
 		this.arrival = arrival;
