@@ -30,8 +30,18 @@ public class ActivityConstructorMethodTest {
 	}
 
  	@Test(expected = ActivityException.class)
- 	public void nameNullTest(){
+ 	public void nullNameTest(){
  		new Activity(this.provider, null, 18, 80, 0);
+ 	}
+ 	
+ 	@Test(expected = ActivityException.class)
+ 	public void emptyNameTest(){
+ 		new Activity(this.provider, "", 18, 80, 0);
+ 	}
+ 	
+ 	@Test(expected = ActivityException.class)
+ 	public void blankNameTest(){
+ 		new Activity(this.provider, " ", 18, 80, 0);
  	}
 
 	@Test(expected = ActivityException.class)
