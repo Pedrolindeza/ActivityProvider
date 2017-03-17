@@ -24,12 +24,12 @@ public class ActivityMatchAgeMethodTest {
 	}
 	
 	@Test
-	public void ageBelow() {
+	public void ageBelowTest() {
 		Assert.assertFalse(this.activity.matchAge(10));
 	}
 	
 	@Test
-	public void ageAbove() {
+	public void ageAboveTest() {
 		Assert.assertFalse(this.activity.matchAge(90));
 	}
 

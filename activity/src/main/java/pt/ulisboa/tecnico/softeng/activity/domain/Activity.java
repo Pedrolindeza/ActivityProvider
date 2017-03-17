@@ -35,8 +35,8 @@ public class Activity {
 		provider.addActivity(this);
 	}
 
-	private void checkName(String name){
-		if (name == null){
+	public void checkName(String name){
+		if (name == null || name == ""||name.trim().length() == 0){
 			throw new ActivityException();
 		}
 	}

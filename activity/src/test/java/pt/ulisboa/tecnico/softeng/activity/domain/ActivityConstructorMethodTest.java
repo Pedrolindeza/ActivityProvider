@@ -29,6 +29,11 @@ public class ActivityConstructorMethodTest {
 		Assert.assertEquals(1, this.provider.getNumberOfActivities());
 	}
 
+ 	@Test(expected = ActivityException.class)
+ 	public void nameNullTest(){
+ 		new Activity(this.provider, null, 18, 80, 0);
+ 	}
+
 	@Test(expected = ActivityException.class)
  	public void minAgeTest(){
 		new Activity(this.provider, "Bush Walking", 10, 80, 25);
@@ -47,11 +52,6 @@ public class ActivityConstructorMethodTest {
  	@Test(expected = ActivityException.class)
  	public void capacityTest(){
 		new Activity(this.provider, "Bush Walking", 18, 80, 0);
- 	}
-
- 	@Test(expected = ActivityException.class)
- 	public void nameTest(){
- 		new Activity(this.provider,null, 18, 80, 0);
  	}
 
 	@After
