@@ -1,3 +1,5 @@
+//Hotel Task 5 - stephaneduarte 81186
+
 package pt.ulisboa.tecnico.softeng.hotel.domain;
 
 import org.joda.time.LocalDate;
@@ -7,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import pt.ulisboa.tecnico.softeng.hotel.domain.Room.Type;
+import pt.ulisboa.tecnico.softeng.hotel.exception.HotelException;
 
 public class HotelHasVacancyMethodTest {
 	private Hotel hotel;
@@ -101,6 +104,28 @@ public class HotelHasVacancyMethodTest {
 		Room room = this.hotel.hasVacancy(Type.SINGLE, arrival, departure);
 
 		Assert.assertNull(room);
+	}
+
+	//Teste entradas null
+	@Test(expected = HotelException.class)
+	public void nullType(){
+		LocalDate arrival = new LocalDate(2016, 12, 20);
+		LocalDate departure = new LocalDate(2016, 12, 23);
+		Room room = this.hotel.hasVacancy(null, arrival, departure);
+	}
+
+	@Test(expected = HotelException.class)
+	public void nullArrival(){
+		LocalDate arrival = new LocalDate(2016, 12, 20);
+		LocalDate departure = new LocalDate(2016, 12, 23);
+		Room room = this.hotel.hasVacancy(Type.DOUBLE, null, departure);
+	}
+
+	@Test(expected = HotelException.class)
+	public void nullDeparture(){
+		LocalDate arrival = new LocalDate(2016, 12, 20);
+		LocalDate departure = new LocalDate(2016, 12, 23);
+		Room room = this.hotel.hasVacancy(Type.DOUBLE, arrival, null);
 	}
 
 	@After
