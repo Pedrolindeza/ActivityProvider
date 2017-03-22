@@ -3,14 +3,14 @@
 To run tests execute: mvn clean install
 To check test coverage execute: mvn clean cobertura:cobertura
 
-|   Number   |          Name           |            Email        |   Name GitHUb  | Grupo |
-| ---------- | ----------------------- | ----------------------- | ---------------| ----- |
-| 80831      | Pedro Lindeza           | pedro.lindeza@ist.utl.pt| pedrolindeza   |   1   |
-|            |                         |                         |                |   2   |
-|            |                         |                         |                |   3   |
-|            |                         |                         |                |   4   |
-|            |                         |                         |                |   5   |
-|            |                         |                         |                |   6   |
-|            |                         |                         |                |   7   |
-|            |                         |                         |                |   8   |
-|            |                         |                         |                |   9   |
+|   Number   |          Name           |            Email          |   Name GitHUb  | Grupo |
+| ---------- | ----------------------- | -----------------------   | ---------------| ----- |
+|       | João Trindade           |   |   |   1   |
+|       | Ricardo Xavier         |  |  |   2   |
+|            | Pedro Lindeza                        |                           |                |   3   |
+|            | João Oliveira                        |                           |                |   4   |
+|            | Madalena Assembleia                        |                           |                |   5   |
+| 81186      | Stéphane Duarte         | stephaneduarte@ist.utl.pt | stephaneduarte |   6   |
+|            | João Calisto                        |                           |                |   7   |
+|            | Inês Leite                        |                           |                |   8   |
+|            | Carolina Xavier                        |                           |                |   9   |
