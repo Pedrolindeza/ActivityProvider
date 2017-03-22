@@ -5,7 +5,7 @@ To check test coverage execute: mvn clean cobertura:cobertura
 
 |   Number   |          Name           |            Email        |   Name GitHUb  | Grupo |
 | ---------- | ----------------------- | ----------------------- | ---------------| ----- |
-|            |                         |                         |                |   1   |
+| 80831      | Pedro Lindeza           | pedro.lindeza@ist.utl.pt| pedrolindeza   |   1   |
 |            |                         |                         |                |   2   |
 |            |                         |                         |                |   3   |
 |            |                         |                         |                |   4   |
