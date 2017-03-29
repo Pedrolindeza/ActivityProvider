@@ -13,4 +13,4 @@ To check test coverage execute: mvn clean cobertura:cobertura
 | 81186      | Stéphane Duarte         | stephaneduarte@ist.utl.pt        | stephaneduarte    |   6   |
 | 81329      | João Calisto            | joao.s.calisto@ist.utl.pt        | jcalisto          |   7   |
 | 81328      | Inês Leite              | ines.marreiros.leite@hotmail.com | inesleite         |   8   |
-| 81172      | Carolina Xavier         | cimx1@hotmail.com               | cimx              |   9   |
+| 81172      | Carolina Xavier         | cimx1@hotmail.com                | cimx              |   9   |
