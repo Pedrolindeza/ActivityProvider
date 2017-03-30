@@ -27,6 +27,10 @@ public class Booking {
 		if (departure.isBefore(arrival)) {
 			throw new HotelException();
 		}
+		long days = departure.compareTo(arrival);
+		if (days < 1){
+			throw new HotelException();
+		}
 	}
 
 	public String getReference() {
@@ -42,10 +46,13 @@ public class Booking {
 	}
 
 	boolean conflict(LocalDate arrival, LocalDate departure) {
+		long days = departure.compareTo(arrival);
 		if (departure.isBefore(arrival)) {
 			throw new HotelException();
 		}
-
+		if (days < 1){
+			throw new HotelException();
+		}
 		if ((arrival.equals(this.arrival) || arrival.isAfter(this.arrival)) && arrival.isBefore(this.departure)) {
 			return true;
 		}

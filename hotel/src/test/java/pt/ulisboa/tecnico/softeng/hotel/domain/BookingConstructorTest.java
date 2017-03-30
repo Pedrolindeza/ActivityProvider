@@ -48,11 +48,17 @@ public class BookingConstructorTest {
 		new Booking(this.hotel, this.arrival, this.arrival.minusDays(1));
 	}
 
-	@Test
+	@Test(expected = HotelException.class)
 	public void arrivalEqualDeparture() {
 		new Booking(this.hotel, this.arrival, this.arrival);
 	}
 
+	@Test
+	public void departureOneDayAfterArrivalDeparture() {
+		LocalDate new_arrival = new LocalDate(2016, 12, 20);
+		new Booking(this.hotel, new_arrival, departure);
+	}
+	
 	@After
 	public void tearDown() {
 		Hotel.hotels.clear();
