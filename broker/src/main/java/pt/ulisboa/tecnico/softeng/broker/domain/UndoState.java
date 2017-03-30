@@ -42,7 +42,7 @@ public class UndoState extends AdventureState {
 		}
 		 
 		if (!adventure.cancelPayment() && !adventure.cancelActivity() && !adventure.cancelRoom()) {
-			adventure.setState(State.CONFIRMED);
+			adventure.setState(State.CANCELLED);
 		}
 	
 	}
