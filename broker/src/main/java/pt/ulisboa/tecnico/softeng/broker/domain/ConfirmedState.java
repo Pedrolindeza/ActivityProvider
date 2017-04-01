@@ -24,6 +24,9 @@ public class ConfirmedState extends AdventureState{
 		BankOperationData operation;
 		try {
 			operation = BankInterface.getOperationData(adventure.getPaymentConfirmation());
+			System.out.println("Reservation: reference-" + operation.getReference() + " type:" + 
+					operation.getType() + " IBAN:" + operation.getIban() + " value:" + 
+					operation.getValue() + " time:" + operation.getTime() + " .");
 		} catch (BankException be) {
 			this.incNumOfRemoteErrors(); 
 			
@@ -44,6 +47,10 @@ public class ConfirmedState extends AdventureState{
 		ActivityReservationData reservation;
 		try {
 			reservation = ActivityInterface.getActivityReservationData(adventure.getActivityConfirmation());
+			System.out.println("Reservation: reference-" + reservation.getReference() + " cancellation:" + 
+					reservation.getCancellation() + " name:" + reservation.getName() + " code:" + 
+					reservation.getCode() + " begin:" + reservation.getBegin() + " end:" + 
+					reservation.getEnd() + " cancellationDate:" + reservation.getCancellationDate() +" .");
 		} catch (ActivityException ae) {
 			adventure.setState(State.UNDO);
 			return;
@@ -61,6 +68,11 @@ public class ConfirmedState extends AdventureState{
 			RoomBookingData booking;
 			try {
 				booking = HotelInterface.getRoomBookingData(adventure.getRoomConfirmation());
+				System.out.println("Booking: reference-" + booking.getReference() + " cancellation:" + 
+						booking.getCancellation() + " hotelName:" + booking.getHotelName() + " hotelCode:" + 
+						booking.getHotelCode() + " roomNumber:" + booking.getRoomNumber() + 
+						" roomType:" + booking.getRoomType() + " arrival:" + booking.getArrival() + 
+						" departure:" + booking.getDeparture() + " cancellationDate:" + booking.getCancellationDate() + " .");
 			} catch (HotelException he) {
 				adventure.setState(State.UNDO);
 				return;
@@ -74,9 +86,10 @@ public class ConfirmedState extends AdventureState{
 			}
 			this.resetNumOfRemoteErrors();
 		}
+		
+		
 	
-		// TODO: prints the complete Adventure file, the info in operation,
-		// reservation and booking
-	
+		
+		
 	}
 }
