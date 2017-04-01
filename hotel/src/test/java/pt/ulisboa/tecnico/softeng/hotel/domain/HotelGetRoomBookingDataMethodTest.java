@@ -3,7 +3,7 @@ package pt.ulisboa.tecnico.softeng.hotel.domain;
 import org.joda.time.LocalDate;
 import org.junit.Before;
 import org.junit.Test;
-
+import org.junit.After;
 import org.junit.Assert;
 import pt.ulisboa.tecnico.softeng.hotel.dataobjects.RoomBookingData;
 import pt.ulisboa.tecnico.softeng.hotel.domain.Room.Type;
@@ -61,6 +61,9 @@ public class HotelGetRoomBookingDataMethodTest {
 	public void wrongReference(){
 		Hotel.getRoomBookingData("ref");
 	}
-	
+	@After
+	public void tearDown() {
+		Hotel.hotels.clear();
+	}
 	
 }
