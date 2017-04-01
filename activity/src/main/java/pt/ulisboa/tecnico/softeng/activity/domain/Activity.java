@@ -75,6 +75,11 @@ public class Activity {
 		this.offers.add(offer);
 	}
 
+
+	Set<ActivityOffer> getOffer(){
+		return offers;
+	}
+
 	Set<ActivityOffer> getOffers(LocalDate begin, LocalDate end, int age) {
 		Set<ActivityOffer> result = new HashSet<>();
 		for (ActivityOffer offer : this.offers) {

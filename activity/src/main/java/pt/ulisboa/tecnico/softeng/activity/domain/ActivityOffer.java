@@ -54,6 +54,15 @@ public class ActivityOffer {
 
 	}
 
+	public Booking getBooking(String reference){
+ 		for(Booking booking : bookings){
+ 			if(booking.getReference()==reference){
+ 				return booking;
+ 			}
+ 		}
+ 		return null;
+ 	}
+
 	boolean available(LocalDate begin, LocalDate end) {
 		return hasVacancy() && matchDate(begin, end);
 	}
