@@ -92,7 +92,7 @@ public class Bank {
 			}
 		}
 		return null;
-	}
+	}	
 
 	public static String processPayment(String IBAN, int amount) {
 		for (Bank bank : Bank.banks) {
@@ -108,8 +108,28 @@ public class Bank {
 		throw new BankException();
 	}
 
-	public static BankOperationData getOperationData(String reference) {
-		// TODO implement
+	public static BankOperationData getOperationData(String reference) throws BankException{
+		if(reference==null || reference=="" || reference==" " || reference=="\n" || reference=="\0")
+			throw new BankException();
+		for (Bank bank : Bank.banks) {
+			Operation o = bank.getOperation(reference);
+			if (o != null) {
+				BankOperationData b = new BankOperationData();
+				b.setIban(o.getAccount().getIBAN());
+				b.setReference(reference);
+				b.setTime(o.getTime());
+				String type;
+				if(o.getType()==Operation.Type.DEPOSIT)
+					type="deposit";
+				else if (o.getType()==Operation.Type.WITHDRAW)
+					type="withdraw";
+				else
+					throw new BankException();
+				b.setType(type);
+				b.setValue(o.getValue());
+				return b;
+			}
+		}
 		throw new BankException();
 	}
 
