@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 import pt.ulisboa.tecnico.softeng.bank.dataobjects.BankOperationData;
+import pt.ulisboa.tecnico.softeng.bank.domain.Operation.Type;
 import pt.ulisboa.tecnico.softeng.bank.exception.BankException;
 
 public class Bank {
@@ -103,9 +104,37 @@ public class Bank {
 		throw new BankException();
 	}
 
-	public static String cancelPayment(String reference) {
-		// TODO implement
-		throw new BankException();
+	public static String cancelPayment(String reference) throws BankException {
+		
+		Type DEPOSIT = null;
+		BankOperationData cancelOperation = null;	
+		String cancelIban = null;
+		int cancelValue = 0;
+		Account cancelAccount = null;
+		String opRef =  null;
+		
+		cancelOperation = getOperationData(reference);
+		if( cancelOperation == null) throw new BankException();
+		
+		cancelIban = cancelOperation.getIban();
+		if( cancelIban == null) throw new BankException();
+		
+		cancelValue = cancelOperation.getValue();
+		if( cancelValue == 0) throw new BankException();
+		
+		for (Bank bank : Bank.banks) {
+			if (bank.getAccount(cancelIban) != null) {
+				cancelAccount = bank.getAccount(cancelIban);
+				break;
+			}
+		}
+		if( cancelAccount == null) throw new BankException();
+		
+		Operation payment = new Operation(DEPOSIT, cancelAccount, cancelValue);
+		opRef = payment.getReference();
+		
+		if ( opRef == null ) throw new BankException(); 
+		else return opRef;
 	}
 
 	public static BankOperationData getOperationData(String reference) throws BankException{

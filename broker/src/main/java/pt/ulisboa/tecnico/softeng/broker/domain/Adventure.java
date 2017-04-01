@@ -161,6 +161,7 @@ public class Adventure {
 		case RESERVE_ACTIVITY:
 			return this.state.getState();
 		case BOOK_ROOM:
+			return this.state.getState();
 		case UNDO:
 			return this.state.getState();
 		case CONFIRMED:

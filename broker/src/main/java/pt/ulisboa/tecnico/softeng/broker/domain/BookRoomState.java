@@ -10,7 +10,7 @@ public class BookRoomState extends AdventureState{
 
 	@Override
 	public State getState() {
-		return State.PROCESS_PAYMENT;
+		return State.BOOK_ROOM;
 	}
 
 	@Override
