@@ -97,9 +97,31 @@ public class Hotel {
 		// TODO implement
 		throw new HotelException();
 	}
+	
+	public Set<Room> getRooms(){
+		return rooms;
+	}
 
 	public static RoomBookingData getRoomBookingData(String reference) {
-		// TODO implement
+		if(reference !=null && reference.trim().length()!=0){
+			RoomBookingData rbd = new RoomBookingData();
+			for(Hotel hotel : Hotel.hotels){
+				Set<Room> hotelRooms = hotel.getRooms();
+				for(Room room : hotelRooms){
+					Booking booking = room.getBooking(reference);
+					if(booking!=null){
+						rbd.setReference(reference);
+						rbd.setArrival(booking.getArrival());
+						rbd.setDeparture(booking.getDeparture());
+						rbd.setHotelCode(hotel.getCode());
+						rbd.setHotelName(hotel.getName());
+						rbd.setRoomNumber(room.getNumber());
+						rbd.setRoomType(room.getType().toString());
+						return rbd;
+					}
+				}
+			}
+		}
 		throw new HotelException();
 	}
 

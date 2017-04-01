@@ -66,6 +66,15 @@ public class Room {
 
 		return true;
 	}
+	
+	public Booking getBooking(String reference){
+		for(Booking booking : bookings){
+			if(booking.getReference()==reference){
+				return booking;
+			}
+		}
+		return null;
+	}
 
 	public Booking reserve(Type type, LocalDate arrival, LocalDate departure) {
 		if (type == null || arrival == null || departure == null) {
