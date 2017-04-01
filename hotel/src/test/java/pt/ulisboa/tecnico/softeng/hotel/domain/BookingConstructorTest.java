@@ -52,12 +52,6 @@ public class BookingConstructorTest {
 	public void arrivalEqualDeparture() {
 		new Booking(this.hotel, this.arrival, this.arrival);
 	}
-
-	@Test
-	public void departureOneDayAfterArrivalDeparture() {
-		LocalDate new_arrival = new LocalDate(2016, 12, 20);
-		new Booking(this.hotel, new_arrival, departure);
-	}
 	
 	@After
 	public void tearDown() {

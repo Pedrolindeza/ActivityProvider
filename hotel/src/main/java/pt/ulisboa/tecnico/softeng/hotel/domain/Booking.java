@@ -27,8 +27,7 @@ public class Booking {
 		if (departure.isBefore(arrival)) {
 			throw new HotelException();
 		}
-		long days = departure.compareTo(arrival);
-		if (days < 1){
+		if (departure.compareTo(arrival) < 1){
 			throw new HotelException();
 		}
 	}
