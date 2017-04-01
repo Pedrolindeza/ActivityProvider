@@ -11,19 +11,18 @@ import pt.ulisboa.tecnico.softeng.hotel.dataobjects.RoomBookingData;
 import pt.ulisboa.tecnico.softeng.hotel.exception.HotelException;
 
 public class BulkRoomBooking {
+	private final int MAX_HOTEL_EXCEPTIONS = 3;
+	private final int MAX_REMOTE_ERRORS = 10;
+	
 	private final Set<String> references = new HashSet<>();
 	private final int number;
 	private final LocalDate arrival;
 	private final LocalDate departure;
+
 	private static boolean cancelled = false;
-	private static int MAX_HOTEL_EXCEPTIONS = 3;
-	private static int MAX_REMOTE_ERRORS = 10;
 	private static int numberOfHotelExceptions;
 	private static int numberOfRemoteErrors;
-
-
-
-
+	
 	public BulkRoomBooking(int number, LocalDate arrival, LocalDate departure) {
 		this.number = number;
 		this.arrival = arrival;
@@ -77,7 +76,6 @@ public class BulkRoomBooking {
 		if (this.cancelled) {
 			return null;
 		}
-
 		for (String reference : this.references) {
 			RoomBookingData data = null;
 			try {
