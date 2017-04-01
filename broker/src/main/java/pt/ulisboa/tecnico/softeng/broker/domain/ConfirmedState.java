@@ -25,19 +25,21 @@ public class ConfirmedState extends AdventureState{
 		try {
 			operation = BankInterface.getOperationData(adventure.getPaymentConfirmation());
 		} catch (BankException be) {
-			// increment number of errors
-			// if (number of errors == 5) {
-			// adventure.setState(State.UNDO);
-			// }
-			// return;
+			this.incNumOfRemoteErrors(); 
+			
+			if (numOfRemoteErrors == 5) {
+				adventure.setState(State.UNDO);
+			}
+			return;
 		} catch (RemoteAccessException rae) {
-			// increment number of errors
-			// if (number of errors == 20) {
-			// adventure.setState(State.UNDO);
-			// }
-			// return;
+			this.incNumOfRemoteErrors(); 
+			
+			if (numOfRemoteErrors == 20) {
+				adventure.setState(State.UNDO);
+			}
+			return;
 		}
-		// reset number of errors
+		this.resetNumOfRemoteErrors();
 	
 		ActivityReservationData reservation;
 		try {
@@ -46,13 +48,14 @@ public class ConfirmedState extends AdventureState{
 			adventure.setState(State.UNDO);
 			return;
 		} catch (RemoteAccessException rae) {
-			// increment number of errors
-			// if (number of errors == 20) {
-			// adventure.setState(State.UNDO);
-			// }
-			// return;
+			this.incNumOfRemoteErrors(); 
+			
+			if (numOfRemoteErrors == 20) {
+				adventure.setState(State.UNDO);
+			}
+			return;
 		}
-		// reset number of errors
+		this.resetNumOfRemoteErrors();
 	
 		if (adventure.getRoomConfirmation() != null) {
 			RoomBookingData booking;
@@ -62,13 +65,14 @@ public class ConfirmedState extends AdventureState{
 				adventure.setState(State.UNDO);
 				return;
 			} catch (RemoteAccessException rae) {
-				// increment number of errors
-				// if (number of errors == 20) {
-				// adventure.setState(State.UNDO);
-				// }
-				// return;
+				this.incNumOfRemoteErrors(); 
+				
+				if (numOfRemoteErrors == 20) {
+					adventure.setState(State.UNDO);
+				}
+				return;
 			}
-			// reset number of errors
+			this.resetNumOfRemoteErrors();
 		}
 	
 		// TODO: prints the complete Adventure file, the info in operation,
