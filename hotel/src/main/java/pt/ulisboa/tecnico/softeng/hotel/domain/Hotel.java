@@ -127,29 +127,32 @@ public class Hotel {
 	}
 
 	public static Set<String> bulkBooking(int number, LocalDate arrival, LocalDate departure) {
-		Set<String> newBookings = new HashSet<String>();
-		
-		if(number!=0 && arrival!=null && departure!=null){
-			try{
-				int i=0;
-				for(Hotel hotel : Hotel.hotels){
-					Set<Room> hotelRooms = hotel.getRooms();
-					for(Room room : hotelRooms){
-						if(i<number){
-							String bookingRef = room.reserve(room.getType(), arrival, departure).getReference();
-							newBookings.add(bookingRef);
-							i++;
-						}
-						else{
-							return newBookings;
-						}
+		if(number==0 || arrival==null || departure==null)
+			throw new HotelException();
+		else{
+			Set<String> newBookings = new HashSet<String>();
+			int i=0;
+			
+			while(i<number){
+				try{
+					String bookingRef = Hotel.reserveRoom(Type.SINGLE, arrival, departure);
+					newBookings.add(bookingRef);
+					i++;
+				}
+				catch(HotelException e){}
+				finally{
+					try{
+					String bookingRef = Hotel.reserveRoom(Type.DOUBLE, arrival, departure);
+					newBookings.add(bookingRef);
+					i++;
+					}
+					catch(HotelException e){
+						throw new HotelException();
 					}
 				}
-				return newBookings;
 			}
-			catch(HotelException e){}
-		}
-		throw new HotelException();
+			return newBookings;
+		}	
 	}
 
 }
