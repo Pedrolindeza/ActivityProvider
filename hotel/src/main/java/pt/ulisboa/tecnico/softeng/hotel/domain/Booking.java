@@ -10,6 +10,8 @@ public class Booking {
 	private final String reference;
 	private final LocalDate arrival;
 	private final LocalDate departure;
+	private String cancellation = null;
+	private LocalDate cancellationDate = null;
 
 	Booking(Hotel hotel, LocalDate arrival, LocalDate departure) {
 		checkArguments(hotel, arrival, departure);
@@ -42,6 +44,20 @@ public class Booking {
 
 	LocalDate getDeparture() {
 		return this.departure;
+	}
+
+	public String getCancellationReference(){
+		return this.cancellation;
+	}
+
+	public void setCancellation() throws HotelException {
+		if (this.cancellation != null) throw new HotelException();
+		this.cancellation = this.reference + "cancelled";
+		this.setCancellationDate();
+	}
+
+	public void setCancellationDate(){
+		this.cancellationDate = LocalDate.now();
 	}
 
 	boolean conflict(LocalDate arrival, LocalDate departure) {
