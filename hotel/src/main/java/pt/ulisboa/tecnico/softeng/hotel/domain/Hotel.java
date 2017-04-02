@@ -139,14 +139,13 @@ public class Hotel {
 					newBookings.add(bookingRef);
 					i++;
 				}
-				catch(HotelException e){}
-				finally{
+				catch(HotelException e1){
 					try{
 					String bookingRef = Hotel.reserveRoom(Type.DOUBLE, arrival, departure);
 					newBookings.add(bookingRef);
 					i++;
 					}
-					catch(HotelException e){
+					catch(HotelException e2){
 						throw new HotelException();
 					}
 				}
