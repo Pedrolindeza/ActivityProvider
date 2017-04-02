@@ -94,9 +94,28 @@ public class Hotel {
 		throw new HotelException();
 	}
 
-	public static String cancelBooking(String roomConfirmation) {
-		// TODO implement
-		throw new HotelException();
+	public static String cancelBooking(String roomConfirmation) throws HotelException {
+		//Confirma input
+		if (roomConfirmation == null || roomConfirmation.trim().length() == 0){
+			throw new HotelException();
+		}
+
+		for (Hotel hotel : hotels){
+			Set<Room> hotelRooms = hotel.getRooms();
+			for (Room room : hotelRooms){
+				Booking booking = room.getBooking(roomConfirmation);
+				if (booking != null){
+					//Se a data de cancelamento e posterior a de chegada
+					if (LocalDate.now().isAfter(booking.getArrival())) throw new HotelException();
+					else {
+						booking.setCancellation();
+						return booking.getCancellationReference();
+					}
+				}
+			}
+		}
+
+		throw new HotelException();		
 	}
 	
 	public Set<Room> getRooms(){
