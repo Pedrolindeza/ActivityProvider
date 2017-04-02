@@ -104,37 +104,38 @@ public class Bank {
 		throw new BankException();
 	}
 
+	
 	public static String cancelPayment(String reference) throws BankException {
 		
-		Type DEPOSIT = null;
-		BankOperationData cancelOperation = null;	
-		String cancelIban = null;
+		Operation cancelOperation = null;	
 		int cancelValue = 0;
 		Account cancelAccount = null;
 		String opRef =  null;
 		
-		cancelOperation = getOperationData(reference);
+		if(reference==null || reference=="" || reference==" " || reference=="\n" || reference=="\0")
+			throw new BankException();
+		
+		for (Bank bank : Bank.banks){
+			if (bank.getOperation(reference) != null)
+				cancelOperation = bank.getOperation(reference);
+		}	
 		if( cancelOperation == null) throw new BankException();
 		
-		cancelIban = cancelOperation.getIban();
-		if( cancelIban == null) throw new BankException();
+		cancelAccount = cancelOperation.getAccount();
+		if( cancelAccount == null) 
+			throw new BankException();
 		
 		cancelValue = cancelOperation.getValue();
-		if( cancelValue == 0) throw new BankException();
+		if( cancelValue == 0) 
+			throw new BankException();
 		
-		for (Bank bank : Bank.banks) {
-			if (bank.getAccount(cancelIban) != null) {
-				cancelAccount = bank.getAccount(cancelIban);
-				break;
-			}
-		}
-		if( cancelAccount == null) throw new BankException();
+		if(cancelAccount.deposit(cancelValue) == null)
+			throw new BankException();
 		
-		Operation payment = new Operation(DEPOSIT, cancelAccount, cancelValue);
+		Operation payment = new Operation(Operation.Type.DEPOSIT, cancelAccount, cancelValue);
 		opRef = payment.getReference();
 		
-		if ( opRef == null ) throw new BankException(); 
-		else return opRef;
+		return opRef;
 	}
 
 	public static BankOperationData getOperationData(String reference) throws BankException{
