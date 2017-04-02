@@ -138,8 +138,8 @@ public class Bank {
 	}
 
 	public static BankOperationData getOperationData(String reference) throws BankException{
-		if(reference==null || reference=="" || reference==" " || reference=="\n" || reference=="\0")
-			throw new BankException();
+		if(reference==null || reference.trim().equals(""))
+			throw new BankException("Invalid Args");
 		for (Bank bank : Bank.banks) {
 			Operation o = bank.getOperation(reference);
 			if (o != null) {
@@ -159,7 +159,7 @@ public class Bank {
 				return b;
 			}
 		}
-		throw new BankException();
+		throw new BankException("error");
 	}
 
 }
