@@ -43,11 +43,16 @@ public class AdventureSequenceTest {
 	public void ActivityReservation(@Mocked final BankInterface bankInterface, @Mocked final ActivityInterface activityInterface) {
 		this.adventure = new Adventure(this.broker, this.begin, this.begin, 20, IBAN, 300);
 
-		BankInterface.processPayment(IBAN, 300);
+		new StrictExpectations() {
+			{
+				BankInterface.processPayment(IBAN, 300);
+				ActivityInterface.reserveActivity(adventure.getBegin(), adventure.getEnd(), adventure.getAge());
+			}
+		};
+
 		this.adventure.process();
 		Assert.assertEquals(Adventure.State.RESERVE_ACTIVITY, this.adventure.getState());
 
-		ActivityInterface.reserveActivity(adventure.getBegin(), adventure.getEnd(), adventure.getAge());
 		this.adventure.process();
 		Assert.assertEquals(Adventure.State.CONFIRMED, this.adventure.getState());
 	}
@@ -57,15 +62,20 @@ public class AdventureSequenceTest {
 		@Mocked final HotelInterface hotelInterface) {
 		this.adventure = new Adventure(this.broker, this.begin, this.end, 20, IBAN, 300);
 
-		BankInterface.processPayment(IBAN, 300);
+		new StrictExpectations(){
+			{
+				BankInterface.processPayment(IBAN, 300);
+				ActivityInterface.reserveActivity(adventure.getBegin(), adventure.getEnd(), adventure.getAge());
+				HotelInterface.reserveRoom(Room.Type.SINGLE, adventure.getBegin(), adventure.getEnd());
+			}
+		};
+		
 		this.adventure.process();
 		Assert.assertEquals(Adventure.State.RESERVE_ACTIVITY, this.adventure.getState());
 
-		ActivityInterface.reserveActivity(adventure.getBegin(), adventure.getEnd(), adventure.getAge());
 		this.adventure.process();
 		Assert.assertEquals(Adventure.State.BOOK_ROOM, this.adventure.getState());
 
-		HotelInterface.reserveRoom(Room.Type.SINGLE, adventure.getBegin(), adventure.getEnd());
 		this.adventure.process();
 		Assert.assertEquals(Adventure.State.CONFIRMED, this.adventure.getState());
 	}
