@@ -21,58 +21,60 @@ public class ConfirmedState extends AdventureState{
 	
 	@Override
 	public void process(Adventure adventure) {
-		BankOperationData operation;
-		try {
-			operation = BankInterface.getOperationData(adventure.getPaymentConfirmation());
+		if (adventure.getPaymentConfirmation() != null) {
+			BankOperationData operation;
+			try {
+				operation = BankInterface.getOperationData(adventure.getPaymentConfirmation());
+				
+			} catch (BankException be) {
+				this.incNumOfRemoteErrors(); 
+				
+				if (numOfRemoteErrors == 5) {
+					adventure.setState(State.UNDO);
+				}
+				return;
+			} catch (RemoteAccessException rae) {
+				this.incNumOfRemoteErrors(); 
+				
+				if (numOfRemoteErrors == 20) {
+					adventure.setState(State.UNDO);
+				}
+				return;
+			}
+			this.resetNumOfRemoteErrors();
+			
 			System.out.println("Reservation: reference-" + operation.getReference() + " type:" + 
 					operation.getType() + " IBAN:" + operation.getIban() + " value:" + 
-					operation.getValue() + " time:" + operation.getTime() + " .");
-		} catch (BankException be) {
-			this.incNumOfRemoteErrors(); 
-			
-			if (numOfRemoteErrors == 5) {
-				adventure.setState(State.UNDO);
-			}
-			return;
-		} catch (RemoteAccessException rae) {
-			this.incNumOfRemoteErrors(); 
-			
-			if (numOfRemoteErrors == 20) {
-				adventure.setState(State.UNDO);
-			}
-			return;
+					operation.getValue() + " time:" + operation.getTime());
 		}
-		this.resetNumOfRemoteErrors();
-	
-		ActivityReservationData reservation;
-		try {
-			reservation = ActivityInterface.getActivityReservationData(adventure.getActivityConfirmation());
+		
+		if (adventure.getActivityConfirmation() != null) {
+			ActivityReservationData reservation;
+			try {
+				reservation = ActivityInterface.getActivityReservationData(adventure.getActivityConfirmation());
+			} catch (ActivityException ae) {
+				adventure.setState(State.UNDO);
+				return;
+			} catch (RemoteAccessException rae) {
+				this.incNumOfRemoteErrors(); 
+				
+				if (numOfRemoteErrors == 20) {
+					adventure.setState(State.UNDO);
+				}
+				return;
+			}
+			this.resetNumOfRemoteErrors();
+			
 			System.out.println("Reservation: reference-" + reservation.getReference() + " cancellation:" + 
 					reservation.getCancellation() + " name:" + reservation.getName() + " code:" + 
 					reservation.getCode() + " begin:" + reservation.getBegin() + " end:" + 
-					reservation.getEnd() + " cancellationDate:" + reservation.getCancellationDate() +" .");
-		} catch (ActivityException ae) {
-			adventure.setState(State.UNDO);
-			return;
-		} catch (RemoteAccessException rae) {
-			this.incNumOfRemoteErrors(); 
-			
-			if (numOfRemoteErrors == 20) {
-				adventure.setState(State.UNDO);
-			}
-			return;
+					reservation.getEnd() + " cancellationDate:" + reservation.getCancellationDate());
 		}
-		this.resetNumOfRemoteErrors();
 	
 		if (adventure.getRoomConfirmation() != null) {
 			RoomBookingData booking;
 			try {
 				booking = HotelInterface.getRoomBookingData(adventure.getRoomConfirmation());
-				System.out.println("Booking: reference-" + booking.getReference() + " cancellation:" + 
-						booking.getCancellation() + " hotelName:" + booking.getHotelName() + " hotelCode:" + 
-						booking.getHotelCode() + " roomNumber:" + booking.getRoomNumber() + 
-						" roomType:" + booking.getRoomType() + " arrival:" + booking.getArrival() + 
-						" departure:" + booking.getDeparture() + " cancellationDate:" + booking.getCancellationDate() + " .");
 			} catch (HotelException he) {
 				adventure.setState(State.UNDO);
 				return;
@@ -85,6 +87,12 @@ public class ConfirmedState extends AdventureState{
 				return;
 			}
 			this.resetNumOfRemoteErrors();
+			
+			System.out.println("Booking: reference-" + booking.getReference() + " cancellation:" + 
+					booking.getCancellation() + " hotelName:" + booking.getHotelName() + " hotelCode:" + 
+					booking.getHotelCode() + " roomNumber:" + booking.getRoomNumber() + 
+					" roomType:" + booking.getRoomType() + " arrival:" + booking.getArrival() + 
+					" departure:" + booking.getDeparture() + " cancellationDate:" + booking.getCancellationDate());
 		}
 		
 		
