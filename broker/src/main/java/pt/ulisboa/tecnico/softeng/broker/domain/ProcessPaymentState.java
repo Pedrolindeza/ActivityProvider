@@ -17,6 +17,7 @@ public class ProcessPaymentState extends AdventureState {
 			adventure.setPaymentConfirmation ( BankInterface.processPayment(adventure.getIBAN(), adventure.getAmount()));
 		} catch (BankException be) {
 			adventure.setState(State.CANCELLED);
+			return;
 		} catch (RemoteAccessException rae) {
 			this.incNumOfRemoteErrors();
 			 if (numOfRemoteErrors == 3) {
@@ -26,7 +27,7 @@ public class ProcessPaymentState extends AdventureState {
 		}
 
 		adventure.setState(State.RESERVE_ACTIVITY);
-
+		return;
 		
 	}
 
