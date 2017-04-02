@@ -10,9 +10,9 @@ import pt.ulisboa.tecnico.softeng.bank.exception.BankException;
 
 
 public class BankGetOperationDataMethodTest {
-	Bank bank;
-	Client client;
-	Account account;
+	private Bank bank;
+	private Client client;
+	private Account account;
 
 	@Before
 	public void setUp() {
