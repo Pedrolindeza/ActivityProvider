@@ -62,6 +62,16 @@ public class ActivityOffer {
  		}
  		return null;
  	}
+	
+	public String cancelReserve(String reference){
+		for (Booking booking : this.bookings) {
+			if(booking.getReference().equals(reference)){ 
+				String referenceCancelled = booking.setCancellationReference();
+				return referenceCancelled; 
+			}
+		}
+		return null;
+	}
 
 	boolean available(LocalDate begin, LocalDate end) {
 		return hasVacancy() && matchDate(begin, end);

@@ -84,8 +84,25 @@ public class ActivityProvider {
 	 	}
 
 	public static String cancelReservation(String activityConfirmation) {
-		// TODO implement
-		throw new ActivityException();
+		if(activityConfirmation == null || activityConfirmation.trim().equals(""))
+			throw new ActivityException();
+		
+		for(ActivityProvider provider : providers){
+			Set<Activity> activities = provider.getActivity();
+			for(Activity activity : activities){
+				Set<ActivityOffer> offers = activity.getOffer();
+				for(ActivityOffer offer : offers){
+					
+					if(LocalDate.now().isBefore(offer.getBegin())) { //So da para cancelar atividades que ainda nao comecaram
+						String cancelResult = offer.cancelReserve(activityConfirmation);
+						if(cancelResult != null) return cancelResult;
+					}
+					
+				}
+			}
+		}
+		
+		throw new ActivityException("Reference Doesn't Exist or Activity already started");
 	}
 
 
