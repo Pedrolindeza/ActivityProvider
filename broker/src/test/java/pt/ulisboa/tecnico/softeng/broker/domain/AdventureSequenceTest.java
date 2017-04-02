@@ -103,10 +103,7 @@ public class AdventureSequenceTest {
 			{
 				BankInterface.processPayment(IBAN, 300);
 				this.result = new RemoteAccessException();
-				BankInterface.processPayment(IBAN, 300);
-				this.result = new RemoteAccessException();
-				BankInterface.processPayment(IBAN, 300);
-				this.result = new RemoteAccessException();
+				this.times = 3;
 			}
 		};
 		this.adventure.process();
