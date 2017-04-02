@@ -67,6 +67,9 @@ public class BulkRoomBooking {
 	void resetNumOfHotelErrors() {
 		this.numberOfHotelErrors = 0;
 	}
+	void resetCancelled() {
+		this.cancelled =false;
+	}
 	
 	public void processBooking() {
 		if (this.cancelled) {
