@@ -127,7 +127,7 @@ public class Hotel {
 	}
 
 	public static Set<String> bulkBooking(int number, LocalDate arrival, LocalDate departure) {
-		if(number==0 || arrival==null || departure==null)
+		if(number<=0 || arrival==null || departure==null)
 			throw new HotelException();
 		else{
 			Set<String> newBookings = new HashSet<String>();
