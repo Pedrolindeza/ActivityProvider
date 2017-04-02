@@ -83,7 +83,7 @@ public class ActivityProvider {
 	 		return activities;
 	 	}
 
-	public static String cancelReservation(String activityConfirmation) {
+	public static String cancelReservation(String activityConfirmation) throws ActivityException {
 		if(activityConfirmation == null || activityConfirmation.trim().equals(""))
 			throw new ActivityException();
 		
@@ -93,10 +93,9 @@ public class ActivityProvider {
 				Set<ActivityOffer> offers = activity.getOffer();
 				for(ActivityOffer offer : offers){
 					
-					if(LocalDate.now().isBefore(offer.getBegin())) { //So da para cancelar atividades que ainda nao comecaram
 						String cancelResult = offer.cancelReserve(activityConfirmation);
 						if(cancelResult != null) return cancelResult;
-					}
+					
 					
 				}
 			}
