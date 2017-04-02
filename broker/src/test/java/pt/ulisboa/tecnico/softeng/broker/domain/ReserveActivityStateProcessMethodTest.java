@@ -9,6 +9,7 @@ import org.junit.runner.RunWith;
 import mockit.Expectations;
 import mockit.Injectable;
 import mockit.Mocked;
+import mockit.StrictExpectations;
 import mockit.integration.junit4.JMockit;
 import pt.ulisboa.tecnico.softeng.activity.exception.ActivityException;
 import pt.ulisboa.tecnico.softeng.broker.domain.Adventure.State;
@@ -45,6 +46,7 @@ public class ReserveActivityStateProcessMethodTest {
 		Assert.assertEquals(Adventure.State.UNDO, this.adventure.getState());
 	}
 
+	//redundancia no teste em relacao ao teste seguinte
 	@Test
 	public void fiveRemoteAccessException(@Mocked final ActivityInterface activityInterface) {
 		new Expectations() {
@@ -84,6 +86,12 @@ public class ReserveActivityStateProcessMethodTest {
 	public void confirmedStateTest(@Mocked final ActivityInterface activityInterface) {
 		this.adventure = new Adventure(this.broker, this.begin, this.begin, 20, IBAN, 300);
 		this.adventure.setState(State.RESERVE_ACTIVITY);
+		
+		new StrictExpectations() {
+			{
+				ActivityInterface.reserveActivity(begin,begin,20);
+			}
+		};	
 		this.adventure.process();
 		
 		Assert.assertEquals(Adventure.State.CONFIRMED, this.adventure.getState());
@@ -91,8 +99,12 @@ public class ReserveActivityStateProcessMethodTest {
 	
 	@Test
 	public void bookRoomStateTest(@Mocked final ActivityInterface activityInterface) {
+		new StrictExpectations() {
+			{
+				ActivityInterface.reserveActivity(begin,end,20);
+			}
+		};
 		this.adventure.process();
-		
 		Assert.assertEquals(Adventure.State.BOOK_ROOM, this.adventure.getState());
 	}
 	
