@@ -79,14 +79,41 @@ public class ActivityProvider {
 		throw new ActivityException();
 	}
 
+	public Set<Activity> getActivity(){
+	 		return activities;
+	 	}
+
 	public static String cancelReservation(String activityConfirmation) {
 		// TODO implement
 		throw new ActivityException();
 	}
 
-	public static ActivityReservationData getActivityReservationData(String reference) {
+
+	public static ActivityReservationData getActivityReservationData(String reference) throws ActivityException{
 		// TODO implement
+		if(reference==null || reference=="" || reference==" " || reference=="\n" || reference=="\0")
+			throw new ActivityException();
+		ActivityReservationData ard = new ActivityReservationData();
+		for (ActivityProvider activityProvider : providers) {
+				Set<Activity> activities = activityProvider.getActivity();
+				for(Activity activity : activities){
+					Set<ActivityOffer> offers =activity.getOffer();
+					for(ActivityOffer offer : offers){
+						Booking booking = offer.getBooking(reference);
+						if(booking!=null){
+ 						ard.setReference(reference);
+ 						ard.setName(activity.getName());
+ 						ard.setCode(activity.getCode());
+ 						ard.setBegin(offer.getBegin());
+ 						ard.setEnd(offer.getEnd());
+ 						return ard;
+ 					}
+				
+			}
+		}
+	}
 		throw new ActivityException();
 	}
-
+	
 }
+
