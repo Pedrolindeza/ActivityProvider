@@ -11,18 +11,14 @@ import pt.ulisboa.tecnico.softeng.bank.exception.BankException;
 
 public class Bank extends Bank_Base {
 	public static final int CODE_SIZE = 4;
-
-	private final String name;
-	private final String code;
-	private final Set<Account> accounts = new HashSet<>();
 	private final Set<Client> clients = new HashSet<>();
 	private final List<Operation> log = new ArrayList<>();
 
 	public Bank(String name, String code) {
 		checkArguments(name, code);
-
-		this.name = name;
-		this.code = code;
+		
+		setName(name);
+		setCode(code);
 
 		FenixFramework.getDomainRoot().addBank(this);
 	}
@@ -49,25 +45,14 @@ public class Bank extends Bank_Base {
 		}
 	}
 
-	String getName() {
-		return this.name;
-	}
-
-	String getCode() {
-		return this.code;
-	}
-
 	int getNumberOfAccounts() {
-		return this.accounts.size();
+		return getAccountSet().size();
 	}
 
 	int getNumberOfClients() {
 		return this.clients.size();
 	}
 
-	void addAccount(Account account) {
-		this.accounts.add(account);
-	}
 
 	boolean hasClient(Client client) {
 		return this.clients.contains(client);
@@ -86,7 +71,7 @@ public class Bank extends Bank_Base {
 			throw new BankException();
 		}
 
-		for (Account account : this.accounts) {
+		for (Account account : getAccountSet()) {
 			if (account.getIBAN().equals(IBAN)) {
 				return account;
 			}
