@@ -6,8 +6,9 @@ import java.util.Set;
 import org.joda.time.LocalDate;
 
 import pt.ulisboa.tecnico.softeng.activity.exception.ActivityException;
+import pt.ist.fenixframework.FenixFramework;
 
-public class Activity {
+public class Activity extends Activity_Base{
 	private static final int MIN_AGE = 18;
 	private static final int MAX_AGE = 100;
 
