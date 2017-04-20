@@ -29,6 +29,8 @@ relation BankHasAccount {
 }
 
 class Client {
+	String ID;
+	String name;
 }
 
 relation ClientHasAccount {
