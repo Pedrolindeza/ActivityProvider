@@ -1,8 +1,6 @@
 package pt.ulisboa.tecnico.softeng.bank.domain;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import pt.ist.fenixframework.FenixFramework;
@@ -12,7 +10,6 @@ import pt.ulisboa.tecnico.softeng.bank.exception.BankException;
 public class Bank extends Bank_Base {
 	public static final int CODE_SIZE = 4;
 	private final Set<Client> clients = new HashSet<>();
-	private final List<Operation> log = new ArrayList<>();
 
 	public Bank(String name, String code) {
 		checkArguments(name, code);
@@ -62,10 +59,6 @@ public class Bank extends Bank_Base {
 		this.clients.add(client);
 	}
 
-	void addLog(Operation operation) {
-		this.log.add(operation);
-	}
-
 	public Account getAccount(String IBAN) {
 		if (IBAN == null || IBAN.trim().equals("")) {
 			throw new BankException();
@@ -81,7 +74,7 @@ public class Bank extends Bank_Base {
 	}
 
 	public Operation getOperation(String reference) {
-		for (Operation operation : this.log) {
+		for (Operation operation : getLogSet()) {
 			if (operation.getReference().equals(reference)) {
 				return operation;
 			}
