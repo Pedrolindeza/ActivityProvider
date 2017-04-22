@@ -44,6 +44,16 @@ relation ClientHasAccount {
 	}
 }
 
+relation BankHasClient {
+	Bank playsRole bank {
+		multiplicity 1..1;
+	}
+	Client playsRole clients {
+		multiplicity 0..*;
+	}
+}
+
+
 class Operation {
 	OperationType type;
 	int value;

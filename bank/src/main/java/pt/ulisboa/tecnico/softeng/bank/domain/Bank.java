@@ -1,7 +1,5 @@
 package pt.ulisboa.tecnico.softeng.bank.domain;
 
-import java.util.HashSet;
-import java.util.Set;
 
 import pt.ist.fenixframework.FenixFramework;
 import pt.ulisboa.tecnico.softeng.bank.dataobjects.BankOperationData;
@@ -9,7 +7,7 @@ import pt.ulisboa.tecnico.softeng.bank.exception.BankException;
 
 public class Bank extends Bank_Base {
 	public static final int CODE_SIZE = 4;
-	private final Set<Client> clients = new HashSet<>();
+	
 
 	public Bank(String name, String code) {
 		checkArguments(name, code);
@@ -47,16 +45,16 @@ public class Bank extends Bank_Base {
 	}
 
 	int getNumberOfClients() {
-		return this.clients.size();
+		return getClientsSet().size();
 	}
 
 
 	boolean hasClient(Client client) {
-		return this.clients.contains(client);
+		return getClientsSet().contains(client);
 	}
 
 	void addClient(Client client) {
-		this.clients.add(client);
+		getClientsSet().add(client);
 	}
 
 	public Account getAccount(String IBAN) {
