@@ -157,4 +157,10 @@ public class Hotel extends Hotel_Base {
 		return availableRooms;
 	}
 
+	public void delete() {
+		setRoot(null);
+		
+		deleteDomainObject();
+	}
+
 }
