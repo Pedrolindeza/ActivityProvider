@@ -18,7 +18,8 @@ class ActivityOffer {
 	int capacity;
 }
 class ActivityProvider{
-
+	String name;
+	String code;
 }
 
 relation ActivityHasActivityOffer {
