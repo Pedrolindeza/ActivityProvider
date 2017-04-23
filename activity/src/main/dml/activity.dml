@@ -13,4 +13,19 @@ relation DomainRootHasActivityApplication {
 }
 
 class ActivityOffer {
+	LocalDate begin;
+	LocalDate end; 
+	int capacity;
+}
+
+class Booking{
+}
+
+relation ActivityOfferHasBooking {
+	ActivityOffer playsRole activityOffer {
+		multiplicity 1..1;
+	}
+	Booking playsRole booking {
+		multiplicity 0..*;
+	}
 }
