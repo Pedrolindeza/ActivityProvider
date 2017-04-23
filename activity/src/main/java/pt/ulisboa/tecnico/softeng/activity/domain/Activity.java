@@ -6,7 +6,6 @@ import java.util.Set;
 import org.joda.time.LocalDate;
 
 import pt.ulisboa.tecnico.softeng.activity.exception.ActivityException;
-import pt.ist.fenixframework.FenixFramework;
 
 public class Activity extends Activity_Base{
 	private static final int MIN_AGE = 18;
@@ -14,20 +13,14 @@ public class Activity extends Activity_Base{
 
 	private static int counter = 0;
 
-	private final String name;
-	private final String code;
-	private final int minAge;
-	private final int maxAge;
-	private final int capacity;
-
 	public Activity(ActivityProvider provider, String name, int minAge, int maxAge, int capacity) {
 		checkArguments(provider, name, minAge, maxAge, capacity);
 
-		this.code = provider.getCode() + Integer.toString(++Activity.counter);
-		this.name = name;
-		this.minAge = minAge;
-		this.maxAge = maxAge;
-		this.capacity = capacity;
+		setCode(provider.getCode() + Integer.toString(++Activity.counter));
+		setName(name);
+		setMinAge(minAge);
+		setMaxAge(maxAge);
+		setCapacity(capacity);
 
 		provider.addActivity(this);
 	}
@@ -46,27 +39,6 @@ public class Activity extends Activity_Base{
 		}
 
 	}
-
-	String getName() {
-		return this.name;
-	}
-
-	String getCode() {
-		return this.code;
-	}
-
-	int getMinAge() {
-		return this.minAge;
-	}
-
-	int getMaxAge() {
-		return this.maxAge;
-	}
-
-	int getCapacity() {
-		return this.capacity;
-	}
-
 	int getNumberOfOffers() {
 		return getActivityOfferSet().size();
 	}
@@ -86,7 +58,7 @@ public class Activity extends Activity_Base{
 	}
 
 	boolean matchAge(int age) {
-		return age >= this.minAge && age <= this.maxAge;
+		return age >= getMinAge() && age <= getMaxAge();
 	}
 
 	public Booking getBooking(String reference) {
@@ -97,10 +69,6 @@ public class Activity extends Activity_Base{
 			}
 		}
 		return null;
-	}
-
-	public Set<ActivityOffer> getOffers() {
-		return getActivityOfferSet();
 	}
 
 }
