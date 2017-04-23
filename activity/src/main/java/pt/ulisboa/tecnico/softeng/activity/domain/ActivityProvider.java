@@ -110,7 +110,7 @@ public class ActivityProvider {
 	public static ActivityReservationData getActivityReservationData(String reference) {
 		for (ActivityProvider provider : ActivityProvider.providers) {
 			for (Activity activity : provider.activities) {
-				for (ActivityOffer offer : activity.getOffers()) {
+				for (ActivityOffer offer : activity.getActivityOfferSet()) {
 					Booking booking = offer.getBooking(reference);
 					if (booking != null) {
 						return new ActivityReservationData(provider, offer, booking);
