@@ -73,5 +73,12 @@ public class ActivityOffer extends ActivityOffer_Base{
 		}
 		return null;
 	}
+	
+	public void delete() {
+		getActivity().getActivityOfferSet().remove(this);
+		
+		deleteDomainObject();
+		
+	}
 
 }
