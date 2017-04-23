@@ -106,4 +106,11 @@ public class ActivityProvider extends ActivityProvider_Base {
 		throw new ActivityException();
 	}
 
+	public void delete() {
+		setRoot(null);
+		
+		deleteDomainObject();
+		
+	}
+
 }

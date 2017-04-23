@@ -71,4 +71,11 @@ public class Activity extends Activity_Base{
 		return null;
 	}
 
+	public void delete() {
+		getProvider().getActivitySet().remove(this);
+		
+		deleteDomainObject();
+		
+	}
+
 }
