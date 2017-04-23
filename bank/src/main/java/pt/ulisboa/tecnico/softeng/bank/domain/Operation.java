@@ -42,5 +42,10 @@ public class Operation extends Operation_Base{
 		}
 
 	}
+	public void delete() {
+		this.getBank().getLogSet().remove(this);
+		this.getAccount().getOperationSet().remove(this);
+		deleteDomainObject();
+	}
 
 }

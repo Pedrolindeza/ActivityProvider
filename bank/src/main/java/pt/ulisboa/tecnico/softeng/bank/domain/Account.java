@@ -48,5 +48,9 @@ public class Account extends Account_Base{
 
 		return new Operation(Operation.Type.WITHDRAW, this, amount).getReference();
 	}
-
+	public void delete() {
+		this.getBank().getAccountSet().remove(this);
+		this.getClient().getAccountSet().remove(this);
+		deleteDomainObject();
+	}
 }
