@@ -6,6 +6,7 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
 
+import pt.ist.fenixframework.FenixFramework;
 import pt.ulisboa.tecnico.softeng.activity.exception.ActivityException;
 
 public class ActivityProviderConstructorMethodTest extends RollbackTestAbstractClass{
@@ -22,8 +23,8 @@ public class ActivityProviderConstructorMethodTest extends RollbackTestAbstractC
 
 		Assert.assertEquals(PROVIDER_NAME, provider.getName());
 		Assert.assertTrue(provider.getCode().length() == ActivityProvider.CODE_SIZE);
-		Assert.assertEquals(1, ActivityProvider.providers.size());
-		Assert.assertEquals(0, provider.getNumberOfActivities());
+		Assert.assertEquals(1, FenixFramework.getDomainRoot().getActivityProviderSet().size());
+		Assert.assertEquals(0, provider.getActivitySet().size());
 	}
 
 	@Test(expected = ActivityException.class)
@@ -64,7 +65,7 @@ public class ActivityProviderConstructorMethodTest extends RollbackTestAbstractC
 			new ActivityProvider(PROVIDER_CODE, "Hello");
 			fail();
 		} catch (ActivityException ae) {
-			Assert.assertEquals(1, ActivityProvider.providers.size());
+			Assert.assertEquals(1, FenixFramework.getDomainRoot().getActivityProviderSet().size());
 		}
 	}
 
@@ -76,7 +77,7 @@ public class ActivityProviderConstructorMethodTest extends RollbackTestAbstractC
 			new ActivityProvider("123456", PROVIDER_NAME);
 			fail();
 		} catch (ActivityException ae) {
-			Assert.assertEquals(1, ActivityProvider.providers.size());
+			Assert.assertEquals(1, FenixFramework.getDomainRoot().getActivityProviderSet().size());
 		}
 	}
 
