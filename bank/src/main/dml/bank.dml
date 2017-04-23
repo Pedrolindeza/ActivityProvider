@@ -40,7 +40,7 @@ relation ClientHasAccount {
 		multiplicity 1..1;
 	}
 	Account playsRole account {
-		multiplicity 0..1;
+		multiplicity 0..*;
 	}
 }
 

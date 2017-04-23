@@ -20,4 +20,9 @@ public class Client extends Client_Base{
 			throw new BankException();
 		}
 	}
+	public void delete() {
+		this.getBank().getClients().remove(this);
+
+		deleteDomainObject();
+	}
 }
