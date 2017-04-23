@@ -31,11 +31,12 @@ public class RoomReserveMethodTest extends RollbackTestAbstractClass {
 		Assert.assertEquals(this.arrival, booking.getArrival());
 		Assert.assertEquals(this.departure, booking.getDeparture());
 	}
-
+	
 	@Test(expected = HotelException.class)
 	public void noDouble() {
 		this.room.reserve(Type.DOUBLE, this.arrival, this.departure);
 	}
+	
 
 	@Test(expected = HotelException.class)
 	public void nullType() {
