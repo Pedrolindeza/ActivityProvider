@@ -67,7 +67,7 @@ public class ActivityOffer extends ActivityOffer_Base{
 	public Booking getBooking(String reference) {
 		for (Booking booking : getBookingSet()) {
 			if (booking.getReference().equals(reference)
-					|| (booking.isCancelled() && booking.getCancellation().equals(reference))) {
+					|| (booking.isCancelled() && booking.getCancel().equals(reference))) {
 				return booking;
 			}
 		}
