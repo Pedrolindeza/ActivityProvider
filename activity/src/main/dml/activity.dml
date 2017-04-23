@@ -22,6 +22,26 @@ class ActivityOffer {
 	LocalDate end; 
 	int capacity;
 }
+class ActivityProvider{
+	String name;
+	String code;
+}
+relation DomainRootHasActivityProviderApplication {
+	.pt.ist.fenixframework.DomainRoot playsRole root {
+		multiplicity 1..1;
+	}
+	ActivityProvider playsRole activityProvider {
+		multiplicity 0..*;
+	}
+}
+relation ActivityProviderHasActivity {
+	ActivityProvider playsRole provider {
+		multiplicity 1..1;
+	}
+	Activity playsRole activity {
+		multiplicity 0..*;
+	}
+}
 
 relation ActivityHasActivityOffer {
 	Activity playsRole activity {
