@@ -11,3 +11,6 @@ relation DomainRootHasActivityApplication {
 		multiplicity 0..*;
 	}
 }
+
+class ActivityOffer {
+}
