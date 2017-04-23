@@ -32,4 +32,5 @@ public class Booking extends Booking_Base{
 	public boolean isCancelled() {
 		return getCancel() != null;
 	}
+
 }

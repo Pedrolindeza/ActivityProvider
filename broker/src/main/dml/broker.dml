@@ -6,6 +6,16 @@ class Broker {
 }
 
 class BulkRoomBooking {
+	int number;
+	LocalDate arrival;
+	LocalDate departure;
+	boolean cancelled;
+	int numberOfHotelExceptions;
+	int numberOfRemoteErrors;
+}
+
+class Reference{
+	String reference;
 }
 
 relation DomainRootHasBrokerApplication {
@@ -37,6 +47,16 @@ relation BrokerHasAdventures {
 		multiplicity 1..1;
 	}
 	Adventure playsRole adventure {
+		multiplicity 0..*;
+	}
+}
+
+relation BulkRoomBookinghasReference{
+	
+	BulkRoomBooking playsRole bulkroombooking{
+		multiplicity 1..1;
+	}
+	Reference playsRole reference{
 		multiplicity 0..*;
 	}
 }
