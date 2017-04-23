@@ -14,7 +14,7 @@ import pt.ist.fenixframework.Atomic;
 import pt.ist.fenixframework.FenixFramework;
 import pt.ist.fenixframework.Atomic.TxMode;
 
-public class ActivityProviderPersistenceTest {
+public class ActivityPersistenceTest {
 	private static final String PROVIDER_NAME = "FAST_TRAVELLL";
 	private static final String PROVIDER_CODE = "code00";
 	private static final String ACTIVITY_NAME = "Running11";
