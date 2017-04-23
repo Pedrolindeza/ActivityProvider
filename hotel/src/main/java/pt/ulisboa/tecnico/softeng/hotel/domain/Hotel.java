@@ -14,16 +14,14 @@ import pt.ulisboa.tecnico.softeng.hotel.exception.HotelException;
 public class Hotel extends Hotel_Base {
 
 	static final int CODE_SIZE = 7;
-
-	private final String code;
-	private final String name;
+	
 	private final Set<Room> rooms = new HashSet<>();
 
 	public Hotel(String code, String name) {
 		checkArguments(code, name);
 
-		this.code = code;
-		this.name = name;
+		setCode(code);
+		setName(name);
 		
 		FenixFramework.getDomainRoot().addHotel(this);
 	}
@@ -66,15 +64,7 @@ public class Hotel extends Hotel_Base {
 		}
 		return availableRooms;
 	}
-
-	public String getCode() {
-		return this.code;
-	}
-
-	public String getName() {
-		return this.name;
-	}
-
+	
 	void addRoom(Room room) {
 		if (hasRoom(room.getNumber())) {
 			throw new HotelException();
