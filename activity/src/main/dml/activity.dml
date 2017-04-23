@@ -17,6 +17,9 @@ class ActivityOffer {
 	LocalDate end; 
 	int capacity;
 }
+class ActivityProvider{
+
+}
 
 relation ActivityHasActivityOffer {
 	Activity playsRole activity {
