@@ -70,16 +70,16 @@ public class Activity extends Activity_Base{
 	}
 */
 	int getNumberOfOffers() {
-		return this.offers.size();
+		return getActivityOfferSet().size();
 	}
 
 	void addOffer(ActivityOffer offer) {
-		this.offers.add(offer);
+		addActivityOffer(offer);
 	}
 
 	Set<ActivityOffer> getOffers(LocalDate begin, LocalDate end, int age) {
 		Set<ActivityOffer> result = new HashSet<>();
-		for (ActivityOffer offer : this.offers) {
+		for (ActivityOffer offer : getActivityOfferSet()) {
 			if (matchAge(age) && offer.available(begin, end)) {
 				result.add(offer);
 			}
@@ -92,7 +92,7 @@ public class Activity extends Activity_Base{
 	}
 
 	public Booking getBooking(String reference) {
-		for (ActivityOffer offer : this.offers) {
+		for (ActivityOffer offer : getActivityOfferSet()) {
 			Booking booking = offer.getBooking(reference);
 			if (booking != null) {
 				return booking;
@@ -102,7 +102,7 @@ public class Activity extends Activity_Base{
 	}
 
 	public Set<ActivityOffer> getOffers() {
-		return this.offers;
+		return getActivityOfferSet();
 	}
 
 }
