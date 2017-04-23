@@ -53,6 +53,7 @@ public class RoomConstructorMethodTest extends RollbackTestAbstractClass {
 		new Room(this.hotel, "JOSE", Type.DOUBLE);
 	}
 
+
 	@Test
 	public void nonUniqueRoomNumber() {
 		new Room(this.hotel, "01", Type.SINGLE);
@@ -63,6 +64,7 @@ public class RoomConstructorMethodTest extends RollbackTestAbstractClass {
 			Assert.assertEquals(1, this.hotel.getNumberOfRooms());
 		}
 	}
+	
 
 	@Test(expected = HotelException.class)
 	public void nullType() {
