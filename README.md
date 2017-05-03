@@ -9,7 +9,7 @@ To run tests execute: mvn clean install
 |  81172     | Carolina Xavier         | cimx1@hotmail.com               | cimx           | Bank      |
 |  81186     | Stephane Duarte         | stephaneduarte@ist.utl.pt       | stephaneduarte | Bank      |
 |  81328     | Inês Leite              | ines.marreiros.leite@hotmail.com| inesleite      | Bank      |
-|            |                         |                                 |                |           |
+|  81329     | João Calisto            | joao.s.calisto@ist.utl.pt       | jcalisto       | Hotel
 |            |                         |                                 |                |           |
 |            |                         |                                 |                |           |
 |            |                         |                                 |                |           |
