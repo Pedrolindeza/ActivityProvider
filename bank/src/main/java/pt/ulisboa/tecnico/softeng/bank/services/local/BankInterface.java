@@ -1,12 +1,19 @@
 package pt.ulisboa.tecnico.softeng.bank.services.local;
 
+
+
+import java.util.ArrayList;
+import java.util.List;
+
 import pt.ist.fenixframework.Atomic;
 import pt.ist.fenixframework.Atomic.TxMode;
 import pt.ist.fenixframework.FenixFramework;
 import pt.ulisboa.tecnico.softeng.bank.domain.Bank;
 import pt.ulisboa.tecnico.softeng.bank.domain.Operation;
 import pt.ulisboa.tecnico.softeng.bank.exception.BankException;
+import pt.ulisboa.tecnico.softeng.bank.services.local.dataobjects.BankData;
 import pt.ulisboa.tecnico.softeng.bank.services.local.dataobjects.BankOperationData;
+
 
 public class BankInterface {
 
@@ -46,6 +53,20 @@ public class BankInterface {
 			}
 		}
 		return null;
+	}
+	
+	@Atomic(mode = TxMode.READ)
+	public static List<BankData> getBanks() {
+		List<BankData> banks = new ArrayList<>();
+		for (Bank bank : FenixFramework.getDomainRoot().getBankSet()) {
+			banks.add(new BankData(bank));
+		}
+		return banks;
+	}
+	
+	@Atomic(mode = TxMode.WRITE)
+	public static void createBank(BankData bankData) {
+		new Bank(bankData.getCode(), bankData.getName());
 	}
 
 }
