@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Clients</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet"
+	th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}" />
+<script th:src="@{/webjars/jquery/3.1.1/jquery.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
+</head>
+<body>
+	<div class="container">
+		<h2>
+			Welcome to Bank <span th:text="${bank.name}">Name</span> Clients
+		</h2>
+        <a class="btn btn-default pull-right" th:href="@{/banks}">Banks</a>
+		<br/>
+		<h3>Create Client</h3>
+		<p class="text-danger" th:text="${error}">Error</p>
+        <form class="form-inline" th:action="@{/bank/{code}/clients(code=${bank.code})}" th:object="${client}" method="post">
+	 		<label>Name: </label> <input class="form-control" type="name" th:field="*{name}" />
+		</form>
+		<br/>
+		<h3>Client List</h3>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Nome</th>
+					<th>ID</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="client: ${bank.clients}">
+					<td th:text="${client.nome}">Nome</td>
+					<td th:text="${client.id}">ID</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>
