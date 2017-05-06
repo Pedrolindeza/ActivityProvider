@@ -1,5 +1,5 @@
 dbAlias=//localhost:3306/advbank
 dbUsername=root
-dbPassword=sporting
+dbPassword=password
 updateRepositoryStructureIfNeeded=true
 canCreateDomainMetaObjects=false
