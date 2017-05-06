@@ -34,9 +34,9 @@
 				<tr th:each="hotel: ${hotels}">
 					<td th:text="${hotel.name}">Name</td>
 					<td th:text="${hotel.code}">Code</td>
-<!-- 				<td><a
-						th:href="@{/hotel/{code}/adventures(code=${hotel.code})}">Link</a></td>
-     				<td><a
+			<td><a
+						th:href="@{/hotel/{code}/rooms(code=${hotel.code})}">Rooms</a></td>
+     			<!-- 		<td><a
 						th:href="@{/brokers/{code}/bulks(code=${hotel.code})}">Link</a></td>
 -->	
 				</tr>
