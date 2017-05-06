@@ -20,7 +20,7 @@
 		<table class="table table-striped">
 			<thead>
 				<tr>
-					<th>Client</th>
+					<th>Client Name</th>
 					<th>Reference</th>
 					<th>Type</th>
 					<th>Value</th>
@@ -29,7 +29,7 @@
 			</thead>
 			<tbody>
 				<tr th:each="operation: ${account.operations}">
-					<td th:text="${operation.account.client}">Client</td>
+					<td th:text="${operation.account.client.name}">Client Name</td>
 					<td th:text="${operation.reference}">Reference</td>
 					<td th:text="${operation.type}">Type</td>
 					<td th:text="${operation.value}">Value</td>
