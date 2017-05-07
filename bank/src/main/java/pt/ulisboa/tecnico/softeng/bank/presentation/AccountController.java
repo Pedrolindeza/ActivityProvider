@@ -29,7 +29,13 @@ public class AccountController {
 		BankData bankData = BankInterface.getBankDataByCode(bankCode);
 		ClientData clientData = BankInterface.getClientDataByID(bankCode, clientID);
 
-		if (clientData == null) {
+		if (bankData == null) {
+			model.addAttribute("error", "Error: it does not exist a bank with the code " + bankCode);
+			model.addAttribute("bank", new BankData());
+			model.addAttribute("banks", BankInterface.getBanks());
+			return "banks";
+		}
+		else if (clientData == null) {
 			model.addAttribute("error", "Error: it does not exist a client with the code " + clientID);
 			model.addAttribute("client", new ClientData());
 			model.addAttribute("clients", BankInterface.getClients());
@@ -44,16 +50,16 @@ public class AccountController {
 
 	@RequestMapping(method = RequestMethod.POST)
 	public String submitAccount(Model model, @PathVariable String bankCode, @PathVariable String clientID, @ModelAttribute AccountData accountData) {
-		System.out.println("TENTEI");
 		logger.info("submitaccount bankCode:{} clientID:{}, IBAN:{}, balance:{}", bankCode, clientID, accountData.getIBAN(),
 				accountData.getBalance());
 
 		try {
-			BankInterface.createAccount(bankCode, clientID);
+			BankInterface.createAccount(bankCode, clientID, accountData);
 		} catch (BankException be) {
 			model.addAttribute("error", "Error: it was not possible to create the account");
 			model.addAttribute("account", accountData);
 			model.addAttribute("client", BankInterface.getClientDataByID(bankCode,clientID));
+			model.addAttribute("bank", BankInterface.getBankDataByCode(bankCode));
 			return "accounts";
 		}
 

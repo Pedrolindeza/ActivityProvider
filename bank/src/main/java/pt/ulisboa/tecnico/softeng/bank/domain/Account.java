@@ -1,6 +1,7 @@
 package pt.ulisboa.tecnico.softeng.bank.domain;
 
 import pt.ulisboa.tecnico.softeng.bank.exception.BankException;
+import pt.ulisboa.tecnico.softeng.bank.services.local.dataobjects.AccountData;
 
 public class Account extends Account_Base {
 
@@ -9,6 +10,16 @@ public class Account extends Account_Base {
 
 		setIBAN(bank.getCode() + Integer.toString(bank.getCounter()));
 		setBalance(0);
+
+		setClient(client);
+		setBank(bank);
+	}
+	
+	public Account(Bank bank, Client client, AccountData accountData) {
+		checkArguments(bank, client);
+
+		setIBAN(bank.getCode() + Integer.toString(bank.getCounter()));
+		setBalance(accountData.getBalance());
 
 		setClient(client);
 		setBank(bank);
