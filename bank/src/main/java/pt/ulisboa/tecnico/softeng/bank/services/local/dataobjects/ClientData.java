@@ -1,5 +1,9 @@
 package pt.ulisboa.tecnico.softeng.bank.services.local.dataobjects;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import pt.ulisboa.tecnico.softeng.bank.domain.Account;
 import pt.ulisboa.tecnico.softeng.bank.domain.Bank;
 import pt.ulisboa.tecnico.softeng.bank.domain.Client;
 
@@ -7,6 +11,7 @@ public class ClientData {
 	private String name;
 	private String id;
 	private Bank bank; 
+	private List<AccountData> accounts = new ArrayList<>();
 	
 	public ClientData(){
 		
@@ -16,7 +21,10 @@ public class ClientData {
 		this.name = client.getName();
 		this.id = client.getID();
 		this.bank = client.getBank();
-
+		
+		for(Account account: client.getAccountSet()){
+			 this.accounts.add(new AccountData(account));
+		}
 	}
 	
 	public String getName(){
@@ -31,6 +39,10 @@ public class ClientData {
 		return this.bank;
 	}
 	
+	public List<AccountData> getAccounts() {
+		return this.accounts;
+	}
+	
 	public void setName(String name){
 		this.name = name;
 	}
@@ -41,5 +53,9 @@ public class ClientData {
 	
 	public void setBank(Bank bank){
 		this.bank = bank; 
+	}
+	
+	public void setAccounts(List<AccountData> accounts){
+		this.accounts = accounts;
 	}
 }
