@@ -23,7 +23,7 @@ public class OperationController {
 	private static Logger logger = LoggerFactory.getLogger(OperationController.class);
 
 	@RequestMapping(method = RequestMethod.GET)
-	public String showClients(Model model, @PathVariable String bankCode) {
+	public String showOperations(Model model, @PathVariable String bankCode) {
 		logger.info("showOperations code:{}", bankCode);
 
 		BankData bankData = BankInterface.getBankDataByCode(bankCode);

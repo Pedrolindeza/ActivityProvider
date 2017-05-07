@@ -31,7 +31,7 @@
 				<tr th:each="operation: ${bank.operations}">
 					<td th:text="${operation.reference}">Reference</td>
 					<td th:text="${operation.type}">Type</td>
-					<td th:text="${operation.iban}">Type</td>
+					<td th:text="${operation.account.IBAN}">IBAN</td>
 					<td th:text="${operation.value}">Value</td>
 					<td th:text="${operation.time}">Time</td>
 				</tr>
