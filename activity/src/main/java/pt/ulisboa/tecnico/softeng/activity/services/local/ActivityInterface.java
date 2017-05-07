@@ -14,7 +14,7 @@ import pt.ulisboa.tecnico.softeng.activity.domain.ActivityProvider;
 import pt.ulisboa.tecnico.softeng.activity.domain.Booking;
 import pt.ulisboa.tecnico.softeng.activity.exception.ActivityException;
 import pt.ulisboa.tecnico.softeng.activity.services.local.dataobjects.ActivityData;
-//import pt.ulisboa.tecnico.softeng.activity.services.local.dataobjects.ActivityOfferData;
+import pt.ulisboa.tecnico.softeng.activity.services.local.dataobjects.ActivityOfferData;
 import pt.ulisboa.tecnico.softeng.activity.services.local.dataobjects.ActivityProviderData;
 import pt.ulisboa.tecnico.softeng.activity.services.local.dataobjects.ActivityProviderData.CopyDepth;
 import pt.ulisboa.tecnico.softeng.activity.services.local.dataobjects.ActivityReservationData;
@@ -55,10 +55,19 @@ public class ActivityInterface {
 	}
 		
 	
-	/*@Atomic(mode = TxMode.WRITE)
-	public static ActivityOffer createActivityOffer(String activityCode, ActivityOfferData activityOfferData) {
-		return new ActivityOffer(ActivityInterface.getActivityByCode(activityCode), activityOfferData.getBegin(), activityOfferData.getEnd() );
-	}*/
+	@Atomic(mode = TxMode.WRITE)
+	public static ActivityOffer createActivityOffer(ActivityOfferData activityOfferData) {
+		return new ActivityOffer(activityOfferData.getActivity(), activityOfferData.getBegin(), activityOfferData.getEnd() );
+	}
+	
+	@Atomic(mode = TxMode.WRITE)
+	public static List<ActivityData> getActivityDatasByProvider(String providerCode) {
+		List<ActivityData> activities = new ArrayList<>();
+		for (ActivityData activityData : getActivityProviderDataByCode(providerCode, CopyDepth.OFFER).getActivities()) {
+			activities.add(activityData);
+		}
+		return activities;
+	}
 	
 	/*@Atomic(mode = TxMode.WRITE)
 	public static List<ActivityOfferData> getActivityOffers() {
