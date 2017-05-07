@@ -10,7 +10,7 @@ import pt.ulisboa.tecnico.softeng.bank.services.local.dataobjects.ClientData;
 public class BankData {
 	
 	public static enum CopyDepth {
-		CLIENT //TODO add more
+		CLIENT
 	};
 	
 	private List<ClientData> clients = new ArrayList<>();
