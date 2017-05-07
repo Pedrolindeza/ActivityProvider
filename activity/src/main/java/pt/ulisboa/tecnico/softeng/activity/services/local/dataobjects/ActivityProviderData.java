@@ -10,19 +10,32 @@ import pt.ulisboa.tecnico.softeng.activity.domain.ActivityProvider;
 
 public class ActivityProviderData {
 
+	public static enum CopyDepth{
+		SHALLOW, ACTIVITY, OFFER
+	};
+	
 	private String name;
 	private String code;
-	//private List<ActivityData> activities = new ArrayList<>();
+	private List<ActivityData> activities = new ArrayList<>();
 
 	public ActivityProviderData() {
 	}
 
-	public ActivityProviderData(ActivityProvider activityProvider) {
+	public ActivityProviderData(ActivityProvider activityProvider, CopyDepth depth) {
 		this.name = activityProvider.getName();
 		this.code = activityProvider.getCode();
-		/*for (Activity activity : activityProvider.getActivitySet()) {
+		
+		switch(depth){
+		case SHALLOW:
+			break;
+		case ACTIVITY:
+			for (Activity activity : activityProvider.getActivitySet()) {
 				this.activities.add(new ActivityData(activity));
-		}*/
+			}
+			break;
+		case OFFER:
+			break; //TO DO
+		}
 
 	}
 
@@ -42,12 +55,12 @@ public class ActivityProviderData {
 		this.code = code;
 	}
 
-	/*public List<ActivityData> getActivities() {
+	public List<ActivityData> getActivities() {
 		return this.activities;
 	}
 
 	public void setActivities(List<ActivityData> activities) {
 		this.activities = activities;
-	}*/
+	}
 
 }
