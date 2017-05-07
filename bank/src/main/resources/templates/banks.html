@@ -8,7 +8,7 @@
 <script th:src="@{/webjars/jquery/3.1.1/jquery.min.js}"></script>
 <script th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
 </head>
-<body>
+<body style="font-family: segoe ui light; text-align: center; ">
 	<div class="container">
 		<h2>
 			Welcome to Bank Manager
@@ -23,12 +23,13 @@
 		</form>
 		<br/>
 		<h3>List of banks</h3>
-		<table class="table table-striped">
+		<table class="table table-striped" style="font-family: segoe ui light; text-align: left; ">
 			<thead>
 				<tr>
 					<th>Name</th>
 					<th>Code</th>
-					<th>Banks</th>
+					<th>Clients</th>
+					<th>Operations</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -36,6 +37,8 @@
 					<td th:text="${bank.name}">Name</td>
 					<td th:text="${bank.code}">Code</td>
 					<td><a th:href="@{/bank/{code}/clients(code=${bank.code})}">Clients</a></td>
+					<td><a th:href="@{/bank/{code}/operations(code=${bank.code})}">Operations</a></td>
+					
 				</tr>
 			</tbody>
 		</table>
