@@ -104,6 +104,7 @@ public class BankInterface {
 		}
 	}
 	private static Bank getBankByCode(String code) {
+		System.out.println("[DEBUG] À PROCURA DO BANCO " + code);
 		for (Bank bank: FenixFramework.getDomainRoot().getBankSet()) {
 			if (bank.getCode().equals(code)) {
 				return bank;
@@ -112,6 +113,7 @@ public class BankInterface {
 		return null;
 	}
 
+	@Atomic(mode = TxMode.READ)
 	public static ClientData getClientDataByID(String bankCode, String clientID) {
 		Client client = getClientById(bankCode, clientID);
 		if (client != null){
@@ -122,13 +124,10 @@ public class BankInterface {
 	}
 	
 	private static Client getClientById(String bankCode, String clientID){
-		for (Bank bank: FenixFramework.getDomainRoot().getBankSet()){
-			if (bank.getCode().equals(bankCode)){
-				for (Client client: bank.getClientSet()) {
-					if (client.getID().equals(clientID)) {
-						return client;
-					}
-				}
+		Bank bank = getBankByCode(bankCode);
+		for (Client client: bank.getClientSet()) {
+			if (client.getID().equals(clientID)) {
+				return client;
 			}
 		}
 		return null;

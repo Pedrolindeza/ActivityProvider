@@ -34,8 +34,8 @@
 			<tbody>
 				<tr th:each="client: ${bank.clients}">
 					<td th:text="${client.name}">Name</td>
-					<td th:text="${client.getID()}">ID</td>
-					<td><a th:href="@{/bank/{code}/clients/{id}/accounts(code=${bank.code},id=${client.getID()})}">Accounts</a></td>
+					<td th:text="${client.id}">ID</td>
+					<td><a th:href="@{/bank/{code}/client/{id}/accounts(code=${bank.code},id=${client.id})}">Accounts</a></td>
 				</tr>
 			</tbody>
 		</table>
