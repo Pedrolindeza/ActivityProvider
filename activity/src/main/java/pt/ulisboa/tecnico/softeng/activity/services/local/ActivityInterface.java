@@ -101,7 +101,7 @@ public class ActivityInterface {
 		}
 		throw new ActivityException();
 	}
-
+	@Atomic(mode = TxMode.READ)
 	private static Booking getBookingByReference(String reference) {
 		for (ActivityProvider provider : FenixFramework.getDomainRoot().getActivityProviderSet()) {
 			Booking booking = provider.getBooking(reference);
@@ -112,7 +112,7 @@ public class ActivityInterface {
 		return null;
 	}
 	
-	
+	@Atomic(mode = TxMode.READ)
 	private static ActivityProvider getActivityProviderByCode(String code){
 		for (ActivityProvider provider: FenixFramework.getDomainRoot().getActivityProviderSet()){
 			if (provider.getCode().equals(code)){
@@ -122,6 +122,18 @@ public class ActivityInterface {
 		return null;
 	}
 	
+	@Atomic(mode = TxMode.READ)
+	public	static List<Activity> getActivitiesByProvider(String providerCode){
+		List<Activity> list= new ArrayList<>();
+		for (ActivityProvider provider: FenixFramework.getDomainRoot().getActivityProviderSet()){
+			if (provider.getCode().equals(providerCode)){
+				for (Activity activity : provider.getActivitySet()) {
+						list.add(activity);
+				}
+			}
+		}
+		return list;
+	}
 	
 	@Atomic(mode = TxMode.READ)
 	public static ActivityProviderData getActivityProviderDataByCode(String providerCode, CopyDepth depth){

@@ -12,13 +12,13 @@
 <body style="font-family: segoe ui light; text-align: center; ">
 	<div class="container">
 		<h2>
-			Welcome to <span th:text="${activity.code}">Code</span> Offers' Manager
+			Welcome to <span th:text="${activity.name}">Name</span> Offers' Manager
 		</h2>
 		<br/>
 		<h3>Create Offer</h3>
 		<p class="text-danger" th:text="${error}"><b>Error</b></p>
 		<form class="form-inline" th:action="@{/providers/{code}/activities/{activityCode}/offers(code=${provider.code},activityCode=${activity.code})}" th:object="${offer}" method="post">
-			<label>Name: </label> <input class="form-control" type="text" th:field="*{name}" />
+	
 			<label>Begin: </label> <input class="form-control" type="number" th:field="*{begin}" /> 
 			<label>End: </label> <input class="form-control" type="number" th:field="*{end}" />
 			<input class="btn btn-primary" type="submit" value="Submit" />
@@ -28,7 +28,6 @@
 		<table class="table table-striped" style="font-family: segoe ui light; text-align: center; ">
 			<thead>
 				<tr>
-					<th>Name</th>
 					<th>Begin</th>
 					<th>End</th>
 					<th>Reservations</th>
@@ -36,7 +35,6 @@
 			</thead>
 			<tbody>
 				<tr th:each="offer: ${activity.offers}">
-					<td th:text="${offer.name}">Name</td>
 					<td th:text="${offer.begin}">Begin</td>
 					<td th:text="${offer.end}">End</td>
 					<td><a

@@ -43,7 +43,7 @@ public class ActivityOfferController {
 		else if( activityData == null){
 			model.addAttribute("error", "Error: it does not exist an activity with the code" + activityCode);
 			model.addAttribute("activity", new ActivityData());
-			model.addAttribute("activities", ActivityInterface.getActivityDatasByProvider(providerCode));
+			model.addAttribute("activities", activityProviderData.getActivities());
 			return "activities";
 			
 		}
