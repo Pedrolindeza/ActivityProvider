@@ -51,9 +51,9 @@ public class OperationController {
 			model.addAttribute("error", "Error: it was not possible to create the operation");
 			model.addAttribute("client", operationData);
 			model.addAttribute("bank", BankInterface.getBankDataByCode(bankCode));
-			return "clients";
+			return "operations";
 		}
 
-		return "redirect:/bank/" + bankCode + "/clients";
+		return "redirect:/bank/" + bankCode + "/operations";
 	}
 }

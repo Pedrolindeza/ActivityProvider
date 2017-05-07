@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>providers</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet"
+	th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}" />
+<script th:src="@{/webjars/jquery/3.1.1/jquery.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
+
+</head>
+<body style="font-family: segoe ui light; text-align: center; ">
+	<div class="container">
+		<h2>
+			Welcome to <span th:text="${activity.code}">Code</span> Offers' Manager
+		</h2>
+		<br/>
+		<h3>Create Offer</h3>
+		<p class="text-danger" th:text="${error}"><b>Error</b></p>
+		<form class="form-inline" th:action="@{/providers/{code}/activities(code = ${provider.code})/activity(code = ${activity.code})}" th:object="${offer}" method="post">
+			<label>Name: </label> <input class="form-control" type="text" th:field="*{name}" />
+			<label>Begin: </label> <input class="form-control" type="number" th:field="*{begin}" /> 
+			<label>End: </label> <input class="form-control" type="number" th:field="*{end}" />
+			<input class="btn btn-primary" type="submit" value="Submit" />
+		</form>
+		<br/>
+		<h3>List of Offers</h3>
+		<table class="table table-striped" style="font-family: segoe ui light; text-align: center; ">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Begin</th>
+					<th>End</th>
+					<th>Reservations</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="offer: ${activity.offers}">
+					<td th:text="${offer.name}">Name</td>
+					<td th:text="${offer.begin}">Begin</td>
+					<td th:text="${offer.end}">End</td>
+					<td><a
+						th:href="@{/providers/{code}/activities(code=${provider.code})/activity(code=${activity.code})/offer(code=${offer.code})/reservations">Link</a></td>
+					
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>

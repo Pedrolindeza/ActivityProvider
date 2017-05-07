@@ -126,5 +126,16 @@ public class ActivityInterface {
 			return null;
 		}
 	}
+	
+	@Atomic(mode = TxMode.READ)
+	public static ActivityData getActivityDataByCode(String reference) {
+		for (ActivityProvider provider : FenixFramework.getDomainRoot().getActivityProviderSet()) {
+			for (Activity activity : provider.getActivitySet()) {
+				if(activity.getCode() == reference)
+					return new ActivityData(activity);
+			}
+		}	
+		return null;
+	}
 
 }
