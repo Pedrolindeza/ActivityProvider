@@ -79,6 +79,11 @@ public class BankInterface {
 	}
 	
 	@Atomic(mode = TxMode.WRITE)
+	public static void createOperation(String bankCode, BankOperationData operationData) {
+		new Operation(operationData.getType(), operationData.getAccount(), operationData.getValue());
+	}
+	
+	@Atomic(mode = TxMode.WRITE)
 	public static void createClient(String bankCode, ClientData clientData) {
 		new Client(BankInterface.getBankByCode(bankCode), clientData.getName());
 	}

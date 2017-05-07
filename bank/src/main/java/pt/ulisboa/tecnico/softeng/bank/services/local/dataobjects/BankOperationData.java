@@ -2,24 +2,29 @@ package pt.ulisboa.tecnico.softeng.bank.services.local.dataobjects;
 
 import org.joda.time.DateTime;
 
+import pt.ulisboa.tecnico.softeng.bank.domain.Account;
 import pt.ulisboa.tecnico.softeng.bank.domain.Operation;
+import pt.ulisboa.tecnico.softeng.bank.domain.Operation.Type;
+
 
 public class BankOperationData {
 	private String reference;
-	private String type;
+	private Type type;
 	private String iban;
 	private int value;
 	private DateTime time;
+	private Account account;
 
 	public BankOperationData() {
 	}
 
 	public BankOperationData(Operation operation) {
 		this.reference = operation.getReference();
-		this.type = operation.getType().name();
+		this.type = operation.getType();
 		this.iban = operation.getAccount().getIBAN();
 		this.value = operation.getValue();
 		this.time = operation.getTime();
+		this.account = operation.getAccount();
 	}
 
 	public String getReference() {
@@ -30,11 +35,11 @@ public class BankOperationData {
 		this.reference = reference;
 	}
 
-	public String getType() {
+	public Type getType() {
 		return this.type;
 	}
 
-	public void setType(String type) {
+	public void setType(Type type) {
 		this.type = type;
 	}
 
@@ -42,6 +47,14 @@ public class BankOperationData {
 		return this.iban;
 	}
 
+	public Account getAccount() {
+		return this.account;
+	}
+	
+	public void setAccount(Account account) {
+		this.account = account;
+	}
+	
 	public void setIban(String iban) {
 		this.iban = iban;
 	}
