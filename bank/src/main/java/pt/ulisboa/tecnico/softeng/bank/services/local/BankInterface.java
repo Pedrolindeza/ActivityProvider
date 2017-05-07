@@ -13,6 +13,7 @@ import pt.ulisboa.tecnico.softeng.bank.domain.Bank;
 import pt.ulisboa.tecnico.softeng.bank.domain.Client;
 import pt.ulisboa.tecnico.softeng.bank.domain.Operation;
 import pt.ulisboa.tecnico.softeng.bank.exception.BankException;
+import pt.ulisboa.tecnico.softeng.bank.services.local.dataobjects.AccountData;
 //import pt.ulisboa.tecnico.softeng.bank.services.local.dataobjects.AccountData;
 import pt.ulisboa.tecnico.softeng.bank.services.local.dataobjects.BankData;
 import pt.ulisboa.tecnico.softeng.bank.services.local.dataobjects.BankOperationData;
@@ -89,8 +90,8 @@ public class BankInterface {
 	}
 	
 	@Atomic(mode = TxMode.WRITE)
-	public static void createAccount(String bankCode, String clientID) {
-		new Account(BankInterface.getBankByCode(bankCode),BankInterface.getClientById(bankCode, clientID));
+	public static void createAccount(String bankCode, String clientID, AccountData accountData) {
+		new Account(BankInterface.getBankByCode(bankCode),BankInterface.getClientById(bankCode, clientID), accountData);
 	}
 
 	@Atomic(mode = TxMode.READ)
@@ -104,7 +105,6 @@ public class BankInterface {
 		}
 	}
 	private static Bank getBankByCode(String code) {
-		System.out.println("[DEBUG] À PROCURA DO BANCO " + code);
 		for (Bank bank: FenixFramework.getDomainRoot().getBankSet()) {
 			if (bank.getCode().equals(code)) {
 				return bank;

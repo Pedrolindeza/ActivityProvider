@@ -54,7 +54,7 @@ public class AccountController {
 				accountData.getBalance());
 
 		try {
-			BankInterface.createAccount(bankCode, clientID);
+			BankInterface.createAccount(bankCode, clientID, accountData);
 		} catch (BankException be) {
 			model.addAttribute("error", "Error: it was not possible to create the account");
 			model.addAttribute("account", accountData);
