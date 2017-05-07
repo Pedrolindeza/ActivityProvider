@@ -47,7 +47,7 @@ public class ActivityController {
 
 	@RequestMapping(method = RequestMethod.POST)
 	public String activitySubmit(Model model, @PathVariable String providerCode, @ModelAttribute ActivityData activityData) {
-		logger.info("activitySubmit providerCode:{} provider:{}, name:{}, minAge:{}, maxAge:{}, capacity:{}", providerCode, activityData.getActivityProvider(), activityData.getName(), activityData.getMinAge(), activityData.getMaxAge(), activityData.getCapacity());
+		logger.info("activitySubmit providerCode:{} provider:{}, name:{}, code:{} ,minAge:{}, maxAge:{}, capacity:{}", providerCode, activityData.getActivityProvider(), activityData.getName(), activityData.getCode() ,activityData.getMinAge(), activityData.getMaxAge(), activityData.getCapacity());
 
 		
 		try {

@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Bookings</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet"
+	th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}" />
+<script th:src="@{/webjars/jquery/3.1.1/jquery.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
+</head>
+<body>
+	<div class="container">
+		<h2>
+			Welcome to Hotel <span th:text="${hotel.name}">Name</span> Room <span th:text="${room.number}">Number</span> Bookings
+		</h2>
+		<a class="btn btn-default pull-right" th:href="@{/hotel/{code}/rooms(code=${hotel.code})}">Rooms</a>
+		<br/>
+		<br/>
+		<h3>Create Booking</h3>
+		<p class="text-danger" th:text="${error}">Error</p>
+		<form class="form-inline" th:action="@{/hotel/{code}/room/{number}/bookings(code=${hotel.code},number=${room.number})}" th:object="${booking}" method="post">
+			<label>Arrival: </label> <input class="form-control" type="date" th:field="*{arrival}" /> 
+			<label>Departure: </label> <input class="form-control" type="date" th:field="*{departure}" /> 
+			<input class="btn btn-primary" type="submit" value="Submit" />
+		</form>
+		<br/>
+		<h3>List of Bookings</h3>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Reference</th>
+					<th>Arrival</th>
+					<th>Departure</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="booking: ${room.bookings}">
+					<td th:text="${booking.reference}">Reference</td>
+					<td th:text="${booking.arrival}">Arrival</td>
+					<td th:text="${booking.departure}">Departure</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>

@@ -23,7 +23,7 @@ public class ClientData {
 		return this.name;
 	}
 	
-	public String getID(){
+	public String getId(){
 		return this.id;
 	}
 
@@ -35,7 +35,7 @@ public class ClientData {
 		this.name = name;
 	}
 	
-	public void setID(String id){
+	public void setId(String id){
 		this.id = id; 
 	}
 	
