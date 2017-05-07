@@ -12,13 +12,12 @@
 <body style="font-family: segoe ui light; text-align: center; ">
 	<div class="container">
 		<h2>
-			Welcome to Activities' Manager
+			Welcome to <span th:text="${provider.name}">Name</span> Activities' Manager
 		</h2>
 		<br/>
 		<h3>Create Activity</h3>
 		<p class="text-danger" th:text="${error}"><b>Error</b></p>
-		<form class="form-inline" th:action="@{/providers/{code}/activities(providerCode = ${provider.code})/activities}" th:object="${activities}" method="post">
-			<label>Activity Provider: </label> <input class="form-control" type="text" th:field="*{provider}" /> 
+		<form class="form-inline" th:action="@{/providers/{code}/activities(code = ${provider.code})}" th:object="${activity}" method="post">
 			<label>Name: </label> <input class="form-control" type="text" th:field="*{name}" />
 			<label>MinAge: </label> <input class="form-control" type="number" th:field="*{minAge}" /> 
 			<label>MaxAge: </label> <input class="form-control" type="number" th:field="*{maxAge}" />
@@ -30,21 +29,22 @@
 		<table class="table table-striped" style="font-family: segoe ui light; text-align: center; ">
 			<thead>
 				<tr>
-					<th>Activity Provider</th> 
 					<th>Name</th>
 					<th>MinAge</th>
 					<th>MaxAge</th>
 					<th>Capacity</th>
+					<th>Link</th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr th:each="activity: ${activities}">
-					<td th:text="${activity.provider}">Activity Provider</td>
+				<tr th:each="activity: ${provider.activities}">
 					<td th:text="${activity.name}">Name</td>
 					<td th:text="${activity.minAge}">MinAge</td>
 					<td th:text="${activity.maxAge}">MaxAge</td>
 					<td th:text="${activity.capacity}">Capacity</td>
-					<td><a th:href="@{/providers/{code}/activities(code=${provider.code})}">Link</a></td>
+					<td><a
+						th:href="@{/providers/{code}/activities(code=${provider.code})/activity(code=${activity.name})}">Link</a></td>
+					
 				</tr>
 			</tbody>
 		</table>

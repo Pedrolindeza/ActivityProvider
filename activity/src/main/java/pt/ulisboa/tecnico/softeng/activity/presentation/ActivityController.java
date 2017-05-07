@@ -17,7 +17,7 @@ import pt.ulisboa.tecnico.softeng.activity.services.local.dataobjects.ActivityPr
 
 
 @Controller
-@RequestMapping(value = "/providers/{providerCode}/activity/")
+@RequestMapping(value = "/providers/{providerCode}/activities")
 
 public class ActivityController {
 
@@ -31,14 +31,14 @@ public class ActivityController {
 		
 		if( providerData == null){
 			model.addAttribute("error", "Error: it does not exist an activity provider  with the code" + providerCode);
-			model.addAttribute("activityProvider", new ActivityProviderData());
-			model.addAttribute("activityProviders", ActivityInterface.getActivityProviders());
-			return "activityProviders";
+			model.addAttribute("provider", new ActivityProviderData());
+			model.addAttribute("providers", ActivityInterface.getActivityProviders());
+			return "providers";
 			
 		}
 		else{
 			model.addAttribute("activity", new ActivityData());
-			model.addAttribute("activityProvider",providerData);
+			model.addAttribute("provider",providerData);
 			return "activities";
 		}
 	
@@ -57,7 +57,7 @@ public class ActivityController {
 		catch (ActivityException e) {
 			model.addAttribute("error", "Error: it was not possible to create the activity");
 			model.addAttribute("activity", activityData);
-			model.addAttribute("activityProvider", ActivityInterface.getActivityProviderDataByCode(providerCode,CopyDepth.ACTIVITY));
+			model.addAttribute("provider", ActivityInterface.getActivityProviderDataByCode(providerCode,CopyDepth.ACTIVITY));
 			return "activities";
 		}
 
