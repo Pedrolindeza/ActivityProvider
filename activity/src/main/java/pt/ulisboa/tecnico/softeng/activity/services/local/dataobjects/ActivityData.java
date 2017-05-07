@@ -19,6 +19,7 @@ public class ActivityData {
 
 	public ActivityData(Activity activity) {
 		this.provider = activity.getActivityProvider();
+		this.code = activity.getCode();
 		this.name = activity.getName();
 		this.minAge = activity.getMinAge();
 		this.maxAge = activity.getMaxAge();
@@ -29,9 +30,17 @@ public class ActivityData {
 	public String getName() {
 		return this.name;
 	}
+	
+	public String getCode() {
+		return this.code;
+	}
 
 	public void setName(String name){
 		this.name = name;
+	}
+	
+	public void setCode(String code){
+		this.code = code;
 	}
 
 	public int getMinAge() {

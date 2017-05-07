@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>accounts</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet"
+	th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}" />
+<script th:src="@{/webjars/jquery/3.1.1/jquery.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
+</head>
+<body>
+	<div class="container">
+		<h2>
+			Welcome to Bank Manager <span th:text="${bank.name}">Name</span> Client <span th:text="${client.id}">Name</span> Accounts
+		</h2>
+		<br/>
+		<h3>Create Account</h3>
+		<p class="text-danger" th:text="${error}">Error</p>
+		<form class="form-inline" th:action="@{/banks/{code}/client/{id}/accounts(code=${bank.code},id=${clie})}" th:object="${account}" method="post">
+			<label>Balance: </label> <input class="form-control" type="text" th:field="*{balance}" />
+			<input class="btn btn-primary" type="submit" value="Submit" />
+		</form>
+		<br/>
+		<h3>List of accounts</h3>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>IBAN</th>
+					<th>Balance</th>
+					<th>Account</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="account: ${accounts}">
+					<td th:text="${account.IBAN}">IBAN</td>
+					<td th:text="${account.balance}">balance</td>
+					<td><a th:href="@{/bank/{code}/clients/{id}/accounts/{IBAN}/account(code=${bank.code},id=${client.getID()},IBAN=${account.IBAN})}">Account</a></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>
