@@ -112,10 +112,10 @@ public class BankInterface {
 		return null;
 	}
 
-	public static ClientData getClientDataByID(String bankCode, String clientID, ClientData.CopyDepth account) {
+	public static ClientData getClientDataByID(String bankCode, String clientID) {
 		Client client = getClientById(bankCode, clientID);
 		if (client != null){
-			return new ClientData(client, account);
+			return new ClientData(client);
 		} else {
 			return null;
 		}
