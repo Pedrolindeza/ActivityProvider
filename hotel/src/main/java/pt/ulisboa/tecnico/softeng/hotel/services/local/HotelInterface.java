@@ -14,6 +14,7 @@ import pt.ulisboa.tecnico.softeng.hotel.domain.Booking;
 import pt.ulisboa.tecnico.softeng.hotel.domain.Hotel;
 import pt.ulisboa.tecnico.softeng.hotel.domain.Room;
 import pt.ulisboa.tecnico.softeng.hotel.exception.HotelException;
+import pt.ulisboa.tecnico.softeng.hotel.services.local.dataobjects.BookingData;
 import pt.ulisboa.tecnico.softeng.hotel.services.local.dataobjects.HotelData;
 import pt.ulisboa.tecnico.softeng.hotel.services.local.dataobjects.HotelData.CopyDepth;
 import pt.ulisboa.tecnico.softeng.hotel.services.local.dataobjects.RoomBookingData;
@@ -69,9 +70,16 @@ public class HotelInterface {
 	public static void createHotel(HotelData hotelData) {
 		new Hotel(hotelData.getCode(), hotelData.getName());
 	}
+	
 	@Atomic(mode = TxMode.WRITE)
 	public static void createRoom(String hotelCode, RoomData roomData) {
 		new Room(HotelInterface.getHotelByCode(hotelCode), roomData.getNumber(),roomData.getType());
+	}
+	
+	@Atomic(mode = TxMode.WRITE)
+	public static void createBooking(String hotelCode, String number, BookingData bookingData) {
+		System.out.println("HotelCode: " + hotelCode + " | number: " + number + " | Arrival: " + bookingData.getArrival() + " | Departure: " + bookingData.getDeparture());
+		new Booking(HotelInterface.getRoomByNumber(hotelCode, number), bookingData.getArrival(), bookingData.getDeparture());
 	}
 
 	@Atomic(mode = TxMode.WRITE)
@@ -111,12 +119,37 @@ public class HotelInterface {
 		}
 		return null;
 	}
+	
+	private static Room getRoomByNumber(String hotelCode, String number) {
+		for (Hotel hotel: FenixFramework.getDomainRoot().getHotelSet()) {
+			if (hotel.getCode().equals(hotelCode)){
+				for (Room room: hotel.getRoomSet()){
+					if (room.getNumber().equals(number)) {
+						return room;
+					}
+				}
+			}
+		}
+		return null;
+	}
+	
 	@Atomic(mode = TxMode.READ)
 	public static HotelData getHotelDataByCode(String hotelCode,CopyDepth depth) {
 		Hotel hotel = getHotelByCode(hotelCode);
 
 		if (hotel != null) {
 			return new HotelData(hotel,depth);
+		} else {
+			return null;
+		}
+	}
+	
+	@Atomic(mode = TxMode.READ)
+	public static RoomData getRoomDataByNumber(String hotelCode, String number) {
+		Room room = getRoomByNumber(hotelCode, number);
+
+		if (room != null) {
+			return new RoomData(room);
 		} else {
 			return null;
 		}

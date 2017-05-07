@@ -36,6 +36,9 @@
 					<td th:text="${hotel.code}">Code</td>
 			<td><a
 						th:href="@{/hotel/{code}/rooms(code=${hotel.code})}">Rooms</a></td>
+				<!-- <td><a
+					th:href="@{/hotel/{code}/room/{number}/bookings(code=${hotel.code},number=${room.number})}">Bookings</a></td>
+					 -->
      			<!-- 		<td><a
 						th:href="@{/brokers/{code}/bulks(code=${hotel.code})}">Link</a></td>
 -->	

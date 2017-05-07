@@ -10,7 +10,9 @@ import pt.ulisboa.tecnico.softeng.bank.services.local.dataobjects.ClientData;
 public class BankData {
 	
 	private List<ClientData> clients = new ArrayList<>();
+	private List<BankOperationData> operations = new ArrayList<>();
 
+	
 	private String name;
 	private String code; 
 	
@@ -39,6 +41,10 @@ public class BankData {
 		return clients;
 	}
 	
+	public List<BankOperationData> getOperations(){
+		return operations;
+	}
+	
 	public void setName(String name){
 		this.name = name;
 	}
@@ -49,5 +55,9 @@ public class BankData {
 
 	public void addClient(ClientData client){
 		clients.add(client);
+	}
+	
+	public void addClient(BankOperationData operation){
+		operations.add(operation);
 	}
 }
