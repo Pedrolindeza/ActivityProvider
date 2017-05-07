@@ -79,6 +79,17 @@ public class BankInterface {
 		return clients;
 	}
 	
+	@Atomic(mode = TxMode.READ)
+	public static List<AccountData> getAccounts() {
+		List<AccountData> accounts = new ArrayList<>();
+		for (Bank bank : FenixFramework.getDomainRoot().getBankSet()) {
+			for (Account account : bank.getAccountSet()) {
+				accounts.add(new AccountData(account));
+			}
+		}
+		return accounts;
+	}
+	
 	@Atomic(mode = TxMode.WRITE)
 	public static void createOperation(String bankCode, BankOperationData operationData) {
 		new Operation(operationData.getType(), operationData.getAccount(), operationData.getValue());
@@ -137,4 +148,27 @@ public class BankInterface {
 		}
 		return null;
 	}
+	
+	
+	@Atomic(mode = TxMode.READ)
+	public static AccountData getAccountDataByIBAN(String bankCode, String iban) {
+		Account account= getAccountByIBAN(bankCode, iban);
+		if (account != null){
+			return new AccountData(account);
+		} else {
+			return null;
+		}
+	}
+	
+	private static Account getAccountByIBAN(String bankCode, String iban){
+		Bank bank = getBankByCode(bankCode);
+		for (Account account: bank.getAccountSet()) {
+			if (account.getIBAN().equals(iban)) {
+				return account;
+			}
+		}
+		return null;
+	}
+	
+	
 }

@@ -13,7 +13,7 @@
 		<h2>
 			Welcome to Bank Manager <span th:text="${bank.name}">Name</span> Client <span th:text="${client.id}">Name</span> Accounts
 		</h2>
-		<a class="btn btn-default pull-right" th:href="@{/bank/{code}/clients(code=${bank.code})}">Clients</a>
+		<a class="btn btn-default pull-right" th:href="@{/bank/{code}/clients(code=${bank.code})}">Client</a>
 		<br/>
 		<h3>Create Account</h3>
 		<p class="text-danger" th:text="${error}">Error</p>
@@ -22,7 +22,7 @@
 			<input class="btn btn-primary" type="submit" value="Submit" />
 		</form>
 		
-		<h3>Create Operation</h3>
+		<!--<h3>Create Operation</h3>
 		<p class="text-danger" th:text="${error}">Error</p>
 		<form class="form-inline" th:action="@{/banks/{code}/operations(code=${bank.code})}" th:object="${operation}" method="post">
 			<label>Type: </label>
@@ -32,7 +32,7 @@
             </select>
             <label>Value: </label> <input class="form-control" type="number" th:field="*{value}" />
 			<input class="btn btn-primary" type="submit" value="Submit" />
-		</form>
+		</form> -->
 		
 		
 		<br/>
@@ -42,14 +42,14 @@
 				<tr>
 					<th>IBAN</th>
 					<th>Balance</th>
-					<!--<th>Account</th>-->
+					<th>Make Operation</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr th:each="account: ${client.accounts}">
 					<td th:text="${account.IBAN}">IBAN</td>
 					<td th:text="${account.balance}">balance</td>
-					<!--<td><a th:href="@{/bank/{code}/clients/{id}/accounts/{IBAN}/account(code=${bank.code},id=${client.getID()},IBAN=${account.IBAN})}">Account</a></td>-->
+					<td><a th:href="@{/bank/{code}/client/{id}/accounts/{IBAN}/makeOperation(code=${bank.code},id=${client.getId()},IBAN=${account.IBAN})}">Make Operation</a></td>
 				</tr>
 			</tbody>
 		</table>
