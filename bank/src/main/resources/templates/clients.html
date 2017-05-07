@@ -18,21 +18,22 @@
 		<h3>Create Client</h3>
 		<p class="text-danger" th:text="${error}">Error</p>
         <form class="form-inline" th:action="@{/bank/{code}/clients(code=${bank.code})}" th:object="${client}" method="post">
-	 		<label>Name: </label> <input class="form-control" type="name" th:field="*{name}" />
+	 		<label>Name: </label> <input class="form-control" type="text" th:field="*{name}" />
+			<input class="btn btn-primary" type="submit" value="Submit" />
 		</form>
 		<br/>
 		<h3>Client List</h3>
 		<table class="table table-striped">
 			<thead>
 				<tr>
-					<th>Nome</th>
+					<th>Name</th>
 					<th>ID</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr th:each="client: ${bank.clients}">
-					<td th:text="${client.nome}">Nome</td>
-					<td th:text="${client.id}">ID</td>
+					<td th:text="${client.name}">Name</td>
+					<td th:text="${client.getID()}">ID</td>
 				</tr>
 			</tbody>
 		</table>

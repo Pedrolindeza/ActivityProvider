@@ -17,7 +17,6 @@ import pt.ulisboa.tecnico.softeng.bank.services.local.dataobjects.AccountData;
 import pt.ulisboa.tecnico.softeng.bank.services.local.dataobjects.BankData;
 import pt.ulisboa.tecnico.softeng.bank.services.local.dataobjects.BankOperationData;
 import pt.ulisboa.tecnico.softeng.bank.services.local.dataobjects.ClientData;
-import pt.ulisboa.tecnico.softeng.bank.services.local.dataobjects.BankData.CopyDepth;
 
 public class BankInterface {
 
@@ -86,7 +85,7 @@ public class BankInterface {
 	
 	@Atomic(mode = TxMode.WRITE)
 	public static void createBank(BankData bankData) {
-		new Bank(bankData.getCode(), bankData.getName());
+		new Bank(bankData.getName(), bankData.getCode());
 	}
 	
 	@Atomic(mode = TxMode.WRITE)
@@ -95,11 +94,11 @@ public class BankInterface {
 	}
 
 	@Atomic(mode = TxMode.READ)
-	public static BankData getBankDataByCode(String bankCode,CopyDepth depth) {
+	public static BankData getBankDataByCode(String bankCode) {
 		Bank bank = getBankByCode(bankCode);
 
 		if (bank != null) {
-			return new BankData(bank,depth);
+			return new BankData(bank);
 		} else {
 			return null;
 		}
