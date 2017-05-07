@@ -8,6 +8,7 @@ import pt.ulisboa.tecnico.softeng.bank.domain.Client;
 import pt.ulisboa.tecnico.softeng.bank.services.local.dataobjects.ClientData;
 
 public class BankData {
+	
 	private List<ClientData> clients = new ArrayList<>();
 
 	private String name;
