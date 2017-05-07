@@ -28,12 +28,14 @@
 				<tr>
 					<th>Name</th>
 					<th>ID</th>
+					<th>Accounts</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr th:each="client: ${bank.clients}">
 					<td th:text="${client.name}">Name</td>
 					<td th:text="${client.getID()}">ID</td>
+					<td><a th:href="@{/bank/{code}/clients(code=${bank.code})/accounts(id=${client.getID()})}">Accounts</a></td>
 				</tr>
 			</tbody>
 		</table>
