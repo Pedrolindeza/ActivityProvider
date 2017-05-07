@@ -6,7 +6,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
+import pt.ulisboa.tecnico.softeng.bank.exception.BankException;
 import pt.ulisboa.tecnico.softeng.bank.services.local.BankInterface;
 import pt.ulisboa.tecnico.softeng.bank.services.local.dataobjects.AccountData;
 import pt.ulisboa.tecnico.softeng.bank.services.local.dataobjects.BankData;
@@ -15,11 +17,12 @@ import pt.ulisboa.tecnico.softeng.bank.services.local.dataobjects.ClientData;
 
 
 @Controller
-@RequestMapping(value = "/bank/{bankCode}/client/{clientID}/account/{accountIBAN}/makeOperation")
+@RequestMapping(value = "/bank/{bankCode}/client/{clientId}/account/{accountIBAN}/makeOperation")
 public class MakeOperationController {
 	
 	private static Logger logger = LoggerFactory.getLogger(MakeOperationController.class);
 
+	@RequestMapping(method = RequestMethod.GET)
 	public String showMakeOperation (Model model, @PathVariable String bankCode, @PathVariable String clientID, @PathVariable String accountIBAN) {
 		logger.info("showMakeOperation id:{} iban:{}", clientID, accountIBAN);
 
