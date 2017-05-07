@@ -14,7 +14,6 @@ import pt.ulisboa.tecnico.softeng.bank.exception.BankException;
 import pt.ulisboa.tecnico.softeng.bank.presentation.ClientController;
 import pt.ulisboa.tecnico.softeng.bank.services.local.dataobjects.BankData;
 import pt.ulisboa.tecnico.softeng.bank.services.local.dataobjects.ClientData;
-import pt.ulisboa.tecnico.softeng.bank.services.local.dataobjects.BankData.CopyDepth;
 
 @Controller
 @RequestMapping(value = "/bank/{bankCode}/clients")
@@ -26,7 +25,7 @@ public class ClientController {
 	public String showClients(Model model, @PathVariable String bankCode) {
 		logger.info("showClients code:{}", bankCode);
 
-		BankData bankData = BankInterface.getBankDataByCode(bankCode,CopyDepth.CLIENT);
+		BankData bankData = BankInterface.getBankDataByCode(bankCode);
 
 		if (bankData == null) {
 			model.addAttribute("error", "Error: it does not exist a bank with the code " + bankCode);
@@ -50,7 +49,7 @@ public class ClientController {
 		} catch (BankException he) {
 			model.addAttribute("error", "Error: it was not possible to create the client");
 			model.addAttribute("client", clientData);
-			model.addAttribute("bank", BankInterface.getBankDataByCode(bankCode,CopyDepth.CLIENT));
+			model.addAttribute("bank", BankInterface.getBankDataByCode(bankCode));
 			return "clients";
 		}
 

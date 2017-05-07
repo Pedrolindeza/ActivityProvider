@@ -85,7 +85,6 @@ public class BankInterface {
 			return null;
 		}
 	}
-	@Atomic(mode = TxMode.READ)
 	private static Bank getBankByCode(String code) {
 		for (Bank bank: FenixFramework.getDomainRoot().getBankSet()) {
 			if (bank.getCode().equals(code)) {

@@ -8,11 +8,6 @@ import pt.ulisboa.tecnico.softeng.bank.domain.Client;
 import pt.ulisboa.tecnico.softeng.bank.services.local.dataobjects.ClientData;
 
 public class BankData {
-	
-	public static enum CopyDepth {
-		CLIENT //TODO add more
-	};
-	
 	private List<ClientData> clients = new ArrayList<>();
 
 	private String name;
@@ -25,22 +20,11 @@ public class BankData {
 	public BankData(Bank bank) {
 		this.name = bank.getName();
 		this.code = bank.getCode();
-
-	}
-	
-	public BankData(Bank bank, CopyDepth depth) {
-		this.name = bank.getName();
-		this.code = bank.getCode();
-		switch (depth) {
-		//TODO add more
-		case CLIENT:
-			for (Client client: bank.getClientSet()) {
-				this.clients.add(new ClientData(client));
-			}
-			break;
+		for (Client client: bank.getClientSet()) {
+			this.clients.add(new ClientData(client));
 		}
-		
 	}
+
 	
 	public String getName(){
 		return this.name;
