@@ -28,17 +28,26 @@
 				<tr>
 					<th>Name</th>
 					<th>Code</th>
+<<<<<<< HEAD
+=======
+ 					<th>Rooms</th>
+>>>>>>> reference/master
 				</tr>
 			</thead>
 			<tbody>
 				<tr th:each="hotel: ${hotels}">
 					<td th:text="${hotel.name}">Name</td>
 					<td th:text="${hotel.code}">Code</td>
+<<<<<<< HEAD
 <!-- 				<td><a
 						th:href="@{/hotel/{code}/adventures(code=${hotel.code})}">Link</a></td>
      				<td><a
 						th:href="@{/brokers/{code}/bulks(code=${hotel.code})}">Link</a></td>
 -->	
+=======
+				 	<td><a
+						th:href="@{/hotels/{code}/rooms(code=${hotel.code})}">Rooms</a></td>
+>>>>>>> reference/master
 				</tr>
 			</tbody>
 		</table>

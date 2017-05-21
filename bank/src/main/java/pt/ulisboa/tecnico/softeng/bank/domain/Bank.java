@@ -50,9 +50,23 @@ public class Bank extends Bank_Base {
 	}
 
 	@Override
-	public int getCounter() {
-		int counter = super.getCounter() + 1;
-		setCounter(counter);
+	public int getClientCounter() {
+		int counter = super.getClientCounter() + 1;
+		setClientCounter(counter);
+		return counter;
+	}
+
+	@Override
+	public int getAccountCounter() {
+		int counter = super.getAccountCounter() + 1;
+		setAccountCounter(counter);
+		return counter;
+	}
+
+	@Override
+	public int getOperationCounter() {
+		int counter = super.getOperationCounter() + 1;
+		setOperationCounter(counter);
 		return counter;
 	}
 
@@ -77,6 +91,19 @@ public class Bank extends Bank_Base {
 			}
 		}
 		return null;
+	}
+
+	public Operation getOperationbyAdventureId(String adventureId) {
+		for (Operation operation : getOperationSet()) {
+			if (operation.getAdventureId() != null && operation.getAdventureId().equals(adventureId)) {
+				return operation;
+			}
+		}
+		return null;
+	}
+
+	public Client getClientById(String id) {
+		return getClientSet().stream().filter(c -> c.getID().equals(id)).findFirst().orElse(null);
 	}
 
 }

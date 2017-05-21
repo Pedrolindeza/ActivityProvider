@@ -3,7 +3,8 @@ package pt.ulisboa.tecnico.softeng.broker.domain;
 class Broker {
 	String code;
 	String name;
-	int counter;
+	int adventureCounter;
+	int bulkCounter;
 }
 
 relation DomainRootHasBrokerApplication {
@@ -62,6 +63,7 @@ relation AdventureHasState {
 }
 
 class BulkRoomBooking {
+	String id;
 	int number;
 	LocalDate arrival;
 	LocalDate departure;

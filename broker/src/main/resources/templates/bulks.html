@@ -1,9 +1,8 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>Broker's Manager Welcome</title>
+<title>Bulks</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-
 <link rel="stylesheet"
 	th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}" />
 
@@ -35,6 +34,7 @@
 					<th>Departure</th>
 					<th>Actual Number</th>
 					<th>Cancelled</th>
+					<th>Process</th>
 					<th>References</th>
 				</tr>
 			</thead>
@@ -45,6 +45,9 @@
 					<td th:text="${bulk.departure}">departure</td>
 					<td th:text="${bulk.actualNumber}">actual number</td>
 					<td th:text="${bulk.cancelled}">cancelled</td>
+					<td> <form class="form-inline" th:action="@{/brokers/{code}/bulks/{id}/process(code=${broker.code},id=${bulk.id})}" method="post">
+						 <input class="btn btn-primary" type="submit" value="Submit" />
+					</form></td>					
 					<td><p th:each="reference: ${bulk.references}"><span th:text="${reference}">reference</span></p></td>
 				</tr>
 			</tbody>

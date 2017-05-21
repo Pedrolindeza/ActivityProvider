@@ -47,9 +47,9 @@ public class Hotel extends Hotel_Base {
 	}
 
 	@Override
-	public int getCounter() {
-		int counter = super.getCounter() + 1;
-		setCounter(counter);
+	public int getBookingCounter() {
+		int counter = super.getBookingCounter() + 1;
+		setBookingCounter(counter);
 		return counter;
 	}
 
@@ -102,6 +102,17 @@ public class Hotel extends Hotel_Base {
 			}
 		}
 		return null;
+	}
+
+	public Room getRoomByNumber(String number) {
+		return getRoomSet().stream().filter(r -> r.getNumber().equals(number)).findFirst().orElse(null);
+	}
+
+	public Booking getBooking4AdventureId(String adventureId) {
+		return getRoomSet().stream().flatMap(r -> r.getBookingSet().stream())
+				.filter(b -> b.getAdventureId() != null && b.getAdventureId().equals(adventureId)).findFirst()
+				.orElse(null);
+
 	}
 
 }

@@ -12,7 +12,10 @@ import pt.ulisboa.tecnico.softeng.hotel.exception.HotelException;
 import pt.ulisboa.tecnico.softeng.hotel.services.local.HotelInterface;
 import pt.ulisboa.tecnico.softeng.hotel.services.local.dataobjects.HotelData;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> reference/master
 @Controller
 @RequestMapping(value = "/hotels")
 public class HotelController {
@@ -41,4 +44,8 @@ public class HotelController {
 
 		return "redirect:/hotels";
 	}
+<<<<<<< HEAD
+=======
+
+>>>>>>> reference/master
 }
