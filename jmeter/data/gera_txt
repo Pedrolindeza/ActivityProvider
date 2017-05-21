@@ -1,0 +1,94 @@
+
+import string
+import random
+y = input('1:Hotels 2:Rooms 3:Bookings 4:ActivityProviders 5:Activities 6:Offers 7:Banks 8:Clients\n')
+def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
+    return ''.join(random.choice(chars) for _ in range(size))
+if y=="1":
+	file_object  = open("Hotels.txt", "w+")
+	x = 1000
+	while x<1300:
+		file_object.write("ABC"+str(x)+",DEF"+str(x)+"\n")
+		x=x+1
+if y=="2":
+	file_object  = open("Rooms.txt", "w+")
+	x = 0
+	while x<200:
+		z=random.random()
+		if z>0.5:
+			type="SINGLE"
+		else:
+			type="DOUBLE"
+		file_object.write(str(x)+","+type+"\n")
+		x=x+1
+if y=="3":
+	file_object  = open("Bookings.txt", "w+")
+	dia = 1
+	mes = 1
+	ano = 1000
+	x=0
+	while x<150 :
+		if dia>=22:
+			dia=1
+		if mes>12:
+			mes=1
+		randomint=random.randint(1,5)
+		file_object.write(str(ano)+"-"+str(mes)+"-"+str(dia)+","+str(ano)+"-"+str(mes)+"-"+str(dia+randomint)+"\n")
+		dia=dia + randomint+1
+		mes=mes + random.randint(0,1)
+		if(random.random()>0.75):
+			ano=ano + 1
+		x=x+1
+
+if y=="4":
+	file_object  = open("ActivityProviders.txt", "w+")
+	x = 100
+	while x<500:
+		file_object.write("ABC"+str(x)+",DEF"+str(x)+"\n")
+		x=x+1
+
+if y=="5":
+	file_object  = open("Activities.txt", "w+")
+	provider = 100
+	while provider<500:
+		idd_min=random.randint(18,30)
+		idd_max=random.randint(idd_min,80)+5
+		file_object.write("ABC"+str(provider)+","+str(idd_min)+","+str(idd_max)+","+str(random.randint(1,12))+"\n")
+		provider=provider+1
+if y=="6":
+	file_object  = open("Offers.txt", "w+")
+	dia = 1
+	mes = 1
+	ano = 1000
+	x = 1
+	provider=100
+	while provider<600 :
+		if dia>=21:
+			dia=1
+		if mes>12:
+			mes=1
+		randomint=random.randint(1,6)
+		file_object.write("DEF"+str(provider)+str(x)+","+str(ano)+"-"+str(mes)+"-"+str(dia)+","+str(ano)+"-"+str(mes)+"-"+str(dia+randomint)+"\n")
+		dia=dia + randomint+1
+		mes=mes + random.randint(0,1)
+		if(random.random()>0.75):
+			ano=ano + 1
+		x=x+1
+		if(x==100):
+			x=1
+			provider=provider+100
+if y=="7":
+	file_object  = open("Banks.txt", "w+")
+	x = 10
+	while x<99:
+		file_object.write("AB"+str(x)+",DE"+str(x)+"\n")
+		x=x+1
+
+if y=="8":
+	file_object  = open("Clients.txt", "w+")
+	x = 10
+	while x<201:
+		file_object.write(id_generator(10) +"," +str(x) +"," + str(random.randint(100,2000)) + "\n")
+		x=x+1
+		
+file_object.close() 
