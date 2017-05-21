@@ -41,6 +41,13 @@ public class ActivityInterface {
 
 		return new ActivityProviderData(provider);
 	}
+	
+	@Atomic(mode = TxMode.WRITE)
+	public static void deleteProviders() {
+		for (ActivityProvider activityProvider : FenixFramework.getDomainRoot().getActivityProviderSet()){
+				activityProvider.delete();
+		}
+	}
 
 	@Atomic(mode = TxMode.WRITE)
 	public static void createActivity(String code, ActivityData activity) {

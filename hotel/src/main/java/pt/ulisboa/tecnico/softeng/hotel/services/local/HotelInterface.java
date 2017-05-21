@@ -42,6 +42,12 @@ public class HotelInterface {
 
 		return null;
 	}
+	@Atomic(mode = TxMode.WRITE)
+	public static void deleteHotels() {
+		for (Hotel hotel : FenixFramework.getDomainRoot().getHotelSet()) {
+			hotel.delete();
+		}
+	}
 
 	@Atomic(mode = TxMode.WRITE)
 	public static void createRoom(String hotelCode, RoomData roomData) {
@@ -108,20 +114,6 @@ public class HotelInterface {
 			}
 		}
 		throw new HotelException();
-	}
-	
-	@Atomic(mode = TxMode.READ)
-	public static List<HotelData> getHotels() {
-		List<HotelData> hotels = new ArrayList<>();
-		for (Hotel hotel : FenixFramework.getDomainRoot().getHotelSet()) {
-			hotels.add(new HotelData(hotel));
-		}
-		return hotels;
-	}
-	
-	@Atomic(mode = TxMode.WRITE)
-	public static void createHotel(HotelData hotelData) {
-		new Hotel(hotelData.getCode(), hotelData.getName());
 	}
 
 	@Atomic(mode = TxMode.WRITE)
